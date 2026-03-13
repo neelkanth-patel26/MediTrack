@@ -10,11 +10,28 @@ import { useTheme } from '@/lib/theme-context'
 import { AddDoctorDialog, AddPatientDialog, SendAlertDialog, ViewDetailsDialog, SystemAlertsDialog } from '@/components/admin/dialogs'
 import Link from 'next/link'
 
+interface AdminStats {
+  totalUsers: number
+  activeDoctors: number
+  todayAppointments: number
+  systemAlerts: number
+  totalRevenue?: number
+  completedAppointments?: number
+  totalAdminCut?: number
+}
+
+interface AdminDashboardData {
+  stats: AdminStats
+  appointments: any[]
+  recentActivity: any[]
+  systemAlerts: any[]
+}
+
 export default function AdminDashboard() {
   const { user } = useAuth()
   const { getColorValues } = useTheme()
   const colorValues = getColorValues()
-  const [dashboardData, setDashboardData] = useState({
+  const [dashboardData, setDashboardData] = useState<AdminDashboardData>({
     stats: { totalUsers: 0, activeDoctors: 0, todayAppointments: 0, systemAlerts: 0 },
     appointments: [],
     recentActivity: [],
@@ -55,24 +72,24 @@ export default function AdminDashboard() {
     <div className="space-y-6">
       {/* Welcome Header */}
       <Card className="p-6">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-4xl font-bold text-foreground mb-2">
+            <h1 className="text-2xl sm:text-4xl font-bold text-foreground mb-2">
               Welcome back, {user?.name}!
             </h1>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-base sm:text-lg text-muted-foreground">
               System overview and management dashboard
             </p>
           </div>
-          <div className="flex gap-2">
-            <Link href="/admin/announcements">
-              <Button variant="outline">
+          <div className="flex flex-wrap gap-2">
+            <Link href="/admin/announcements" className="flex-1 sm:flex-none">
+              <Button variant="outline" className="w-full">
                 <Bell className="h-4 w-4 mr-2" />
                 Alerts 
               </Button>
             </Link>
             <SendAlertDialog onAlertSent={fetchDashboardData}>
-              <Button style={{ backgroundColor: colorValues.primary }} className="text-white">
+              <Button style={{ backgroundColor: colorValues.primary }} className="text-white flex-1 sm:flex-none w-full">
                 <Plus className="h-4 w-4 mr-2" />
                 Quick Action
               </Button>

@@ -9,10 +9,22 @@ import { useAuth } from '@/lib/auth-context'
 import { AddVitalDialog } from '@/components/patient/dialogs'
 import { useTheme } from '@/lib/theme-context'
 
+interface Vital {
+  id: string
+  blood_pressure_systolic?: number
+  blood_pressure_diastolic?: number
+  heart_rate?: number
+  temperature?: number
+  weight?: number
+  bmi?: number
+  recorded_at: string
+  notes?: string
+}
+
 export default function VitalsPage() {
   const { user } = useAuth()
   const { getColorValues } = useTheme()
-  const [vitals, setVitals] = useState([])
+  const [vitals, setVitals] = useState<Vital[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const colorValues = getColorValues()
   
@@ -37,7 +49,7 @@ export default function VitalsPage() {
     fetchVitals()
   }, [user, isDemoUser])
 
-  const getVitalStatus = (type, value) => {
+  const getVitalStatus = (type: string, value: any) => {
     switch (type) {
       case 'bp':
         if (!value.systolic || !value.diastolic) return { status: 'unknown', color: 'text-gray-500' }
@@ -291,15 +303,15 @@ export default function VitalsPage() {
             <div className="space-y-4">
               {vitals.slice(0, 10).map((vital, index) => (
                 <div key={vital.id} className="group p-5 border border-border rounded-xl hover:shadow-md transition-all duration-200 hover:border-primary/30">
-                  <div className="flex items-center justify-between">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 flex-1">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+                    <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 flex-1">
                       <div className="flex items-center gap-3">
-                        <div className="p-2 rounded-lg bg-red-50 dark:bg-red-900/20">
+                        <div className="p-2 rounded-lg bg-red-50 dark:bg-red-900/20 shrink-0">
                           <Heart className="h-5 w-5 text-red-600" />
                         </div>
-                        <div>
-                          <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Blood Pressure</p>
-                          <p className="text-lg font-semibold text-foreground">
+                        <div className="min-w-0">
+                          <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide truncate">Blood Pressure</p>
+                          <p className="text-base sm:text-lg font-semibold text-foreground">
                             {vital.blood_pressure_systolic && vital.blood_pressure_diastolic 
                               ? `${vital.blood_pressure_systolic}/${vital.blood_pressure_diastolic}` 
                               : '--/--'}
@@ -307,54 +319,56 @@ export default function VitalsPage() {
                         </div>
                       </div>
                       <div className="flex items-center gap-3">
-                        <div className="p-2 rounded-lg bg-green-50 dark:bg-green-900/20">
+                        <div className="p-2 rounded-lg bg-green-50 dark:bg-green-900/20 shrink-0">
                           <Activity className="h-5 w-5 text-green-600" />
                         </div>
-                        <div>
-                          <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Heart Rate</p>
-                          <p className="text-lg font-semibold text-foreground">
+                        <div className="min-w-0">
+                          <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide truncate">Heart Rate</p>
+                          <p className="text-base sm:text-lg font-semibold text-foreground">
                             {vital.heart_rate || '--'}
-                            {vital.heart_rate && <span className="text-sm font-normal ml-1">bpm</span>}
+                            {vital.heart_rate && <span className="text-xs font-normal ml-1">bpm</span>}
                           </p>
                         </div>
                       </div>
                       <div className="flex items-center gap-3">
-                        <div className="p-2 rounded-lg bg-blue-50 dark:bg-blue-900/20">
+                        <div className="p-2 rounded-lg bg-blue-50 dark:bg-blue-900/20 shrink-0">
                           <Thermometer className="h-5 w-5 text-blue-600" />
                         </div>
-                        <div>
-                          <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Temperature</p>
-                          <p className="text-lg font-semibold text-foreground">
+                        <div className="min-w-0">
+                          <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide truncate">Temperature</p>
+                          <p className="text-base sm:text-lg font-semibold text-foreground">
                             {vital.temperature || '--'}
-                            {vital.temperature && <span className="text-sm font-normal ml-1">°C</span>}
+                            {vital.temperature && <span className="text-xs font-normal ml-1">°C</span>}
                           </p>
                         </div>
                       </div>
                       <div className="flex items-center gap-3">
-                        <div className="p-2 rounded-lg bg-purple-50 dark:bg-purple-900/20">
+                        <div className="p-2 rounded-lg bg-purple-50 dark:bg-purple-900/20 shrink-0">
                           <Weight className="h-5 w-5 text-purple-600" />
                         </div>
-                        <div>
-                          <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Weight</p>
-                          <p className="text-lg font-semibold text-foreground">
+                        <div className="min-w-0">
+                          <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide truncate">Weight</p>
+                          <p className="text-base sm:text-lg font-semibold text-foreground">
                             {vital.weight || '--'}
-                            {vital.weight && <span className="text-sm font-normal ml-1">kg</span>}
+                            {vital.weight && <span className="text-xs font-normal ml-1">kg</span>}
                           </p>
                         </div>
                       </div>
                     </div>
-                    <div className="text-right ml-6">
-                      <div className="flex items-center gap-2 mb-1">
-                        <Calendar className="h-4 w-4 text-muted-foreground" />
-                        <p className="text-sm font-medium text-foreground">
-                          {new Date(vital.recorded_at).toLocaleDateString()}
-                        </p>
+                    <div className="flex items-center sm:flex-col sm:items-end justify-between sm:justify-center gap-2 pt-4 sm:pt-0 border-t sm:border-t-0 border-border sm:ml-6">
+                      <div className="flex items-center gap-2">
+                        <Calendar className="h-3.5 w-3.5 text-muted-foreground" />
+                        <div className="text-sm">
+                          <p className="font-medium text-foreground whitespace-nowrap">
+                            {new Date(vital.recorded_at).toLocaleDateString()}
+                          </p>
+                          <p className="text-xs text-muted-foreground sm:text-right">
+                            {new Date(vital.recorded_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                          </p>
+                        </div>
                       </div>
-                      <p className="text-xs text-muted-foreground">
-                        {new Date(vital.recorded_at).toLocaleTimeString()}
-                      </p>
                       {index === 0 && (
-                        <Badge className="mt-2 text-xs" style={{ backgroundColor: `${colorValues.primary}15`, color: colorValues.primary }}>
+                        <Badge className="text-[10px] sm:text-xs" style={{ backgroundColor: `${colorValues.primary}15`, color: colorValues.primary }}>
                           Latest
                         </Badge>
                       )}

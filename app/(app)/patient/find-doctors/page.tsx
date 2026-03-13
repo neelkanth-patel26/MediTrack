@@ -251,17 +251,17 @@ export default function FindDoctorsPage() {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/20 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
       <div className="container mx-auto px-4 py-8 space-y-8">
       {/* Header */}
-      <div className="text-center mb-12">
-        <div className="inline-flex items-center justify-center w-20 h-20 rounded-full mb-6 shadow-xl" style={{ background: `linear-gradient(135deg, ${colorValues.primary}, ${colorValues.primary}dd)` }}>
-          <Stethoscope className="h-10 w-10 text-white" />
+      <div className="text-center mb-8 sm:mb-12 pt-4">
+        <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-full mb-4 sm:mb-6 shadow-xl" style={{ background: `linear-gradient(135deg, ${colorValues.primary}, ${colorValues.primary}dd)` }}>
+          <Stethoscope className="h-8 w-8 sm:h-10 sm:w-10 text-white" />
         </div>
-        <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-slate-900 via-slate-700 to-slate-900 dark:from-white dark:via-slate-200 dark:to-white bg-clip-text text-transparent mb-4">
+        <h1 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-slate-900 via-slate-700 to-slate-900 dark:from-white dark:via-slate-200 dark:to-white bg-clip-text text-transparent mb-3 px-4">
           Find Your Doctor
         </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+        <p className="text-sm sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto px-6">
           Connect with experienced healthcare professionals and get the care you deserve
         </p>
-        <div className="flex items-center justify-center gap-8 mt-8 text-sm text-slate-500 dark:text-slate-400">
+        <div className="hidden sm:flex items-center justify-center gap-8 mt-8 text-sm text-slate-500 dark:text-slate-400">
           <div className="flex items-center gap-2">
             <Award className="h-5 w-5" style={{ color: colorValues.primary }} />
             <span>Verified Doctors</span>
@@ -278,60 +278,65 @@ export default function FindDoctorsPage() {
       </div>
 
       {/* Search and View Controls */}
-      <Card className="p-8 shadow-xl border-0 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl">
-        <div className="space-y-6">
+      <Card className="p-4 sm:p-8 shadow-xl border-0 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-2xl">
+        <div className="space-y-4 sm:space-y-6">
           {/* Main Search Row */}
-          <div className="flex flex-col lg:flex-row gap-4">
+          <div className="flex flex-col lg:flex-row gap-3 sm:gap-4">
             <div className="flex-1">
               <div className="relative">
                 <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-slate-400" />
                 <Input
-                  placeholder="Search by doctor name, specialty, or condition..."
+                  placeholder="Search by name, specialty..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-12 h-14 text-lg border-slate-200 dark:border-slate-600 focus:border-primary/50 rounded-xl shadow-sm"
+                  className="pl-12 h-12 flex-1 sm:h-14 text-base sm:text-lg border-slate-200 dark:border-slate-600 focus:border-primary/50 rounded-xl shadow-sm"
                 />
               </div>
             </div>
-            <Select value={selectedSpecialization} onValueChange={setSelectedSpecialization}>
-              <SelectTrigger className="w-full lg:w-72 h-14 rounded-xl border-slate-200 dark:border-slate-600">
-                <SelectValue placeholder="All Specializations" />
-              </SelectTrigger>
-              <SelectContent>
-                {specializations.map((spec) => (
-                  <SelectItem key={spec} value={spec}>{spec}</SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <Button 
-              onClick={searchDoctors}
-              disabled={isLoading}
-              style={{ backgroundColor: colorValues.primary }}
-              className="text-white h-14 px-8 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
-            >
-              {isLoading ? 'Searching...' : 'Search Doctors'}
-            </Button>
+            <div className="flex flex-col lg:flex-row gap-2 sm:gap-4">
+              <div className="flex-1 w-full">
+                <Select value={selectedSpecialization} onValueChange={setSelectedSpecialization}>
+                  <SelectTrigger className="w-full lg:w-72 h-12 sm:h-14 rounded-xl border-slate-200 dark:border-slate-600">
+                    <SelectValue placeholder="Specialization" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {specializations.map((spec) => (
+                      <SelectItem key={spec} value={spec}>{spec}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <Button 
+                onClick={searchDoctors}
+                disabled={isLoading}
+                style={{ backgroundColor: colorValues.primary }}
+                className="w-full lg:w-auto h-12 sm:h-14 px-8 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
+              >
+                {isLoading ? <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" /> : <Search className="h-5 w-5 lg:mr-2" />}
+                <span className="lg:inline">Search</span>
+              </Button>
+            </div>
           </div>
 
           {/* View Controls and Filters */}
-          <div className="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-slate-600">
-            <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-slate-200 dark:border-slate-600">
+            <div className="flex items-center gap-3 flex-wrap">
               <Button
                 variant={showFilters ? 'default' : 'outline'}
                 onClick={() => setShowFilters(!showFilters)}
-                className={`h-10 px-4 rounded-lg transition-all duration-200 ${showFilters ? 'text-white shadow-lg' : 'hover:bg-slate-100 dark:hover:bg-slate-700'}`}
+                className={`h-10 px-4 rounded-lg transition-all duration-200 ${showFilters ? 'text-white shadow-lg' : 'hover:bg-slate-100 dark:hover:bg-slate-700'} text-sm`}
                 style={showFilters ? { backgroundColor: colorValues.primary } : {}}
               >
                 <SlidersHorizontal className="h-4 w-4 mr-2" />
                 Advanced Filters
               </Button>
-              {(filters.minExperience && filters.minExperience !== 'none') || (filters.maxFee && filters.maxFee !== 'none') || (filters.availability && filters.availability !== 'none') && (
-                <span className="text-sm text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-700 px-3 py-1 rounded-full">
+              {(filters.minExperience && filters.minExperience !== 'none') || (filters.maxFee && filters.maxFee !== 'none') || (filters.availability && filters.availability !== 'none') ? (
+                <span className="text-[10px] sm:text-sm text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-700 px-3 py-1 rounded-full whitespace-nowrap">
                   Filters active
                 </span>
-              )}
+              ) : null}
             </div>
-            <div className="flex items-center gap-2 bg-slate-100 dark:bg-slate-700 rounded-lg p-1">
+            <div className="flex items-center gap-2 bg-slate-100 dark:bg-slate-700 rounded-lg p-1 ml-auto">
               <Button
                 variant="ghost"
                 size="sm"
@@ -463,23 +468,26 @@ export default function FindDoctorsPage() {
             <div className={`p-8 ${viewMode === 'grid' ? 'space-y-6' : 'flex flex-col lg:flex-row gap-8'}`}>
               {/* Doctor Info */}
               <div className="flex-1">
-                <div className="flex items-start justify-between mb-6">
-                  <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 rounded-full flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300" style={{ background: `linear-gradient(135deg, ${colorValues.primary}, ${colorValues.primary}dd)` }}>
-                      <Stethoscope className="h-8 w-8 text-white" />
+                <div className="flex flex-col xs:flex-row xs:items-start justify-between gap-4 mb-6">
+                  <div className="flex items-center gap-4 min-w-0">
+                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300 shrink-0" style={{ background: `linear-gradient(135deg, ${colorValues.primary}, ${colorValues.primary}dd)` }}>
+                      <Stethoscope className="h-7 w-7 sm:h-8 sm:w-8 text-white" />
                     </div>
-                    <div>
-                      <h3 className={`font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors duration-200 ${viewMode === 'grid' ? 'text-xl' : 'text-2xl'}`}>{doctor.name}</h3>
-                      <Badge variant="outline" className="mt-2 px-3 py-1 text-sm font-medium" style={{ borderColor: colorValues.primary, color: colorValues.primary }}>
+                    <div className="min-w-0">
+                      <h3 className={`font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors duration-200 truncate ${viewMode === 'grid' ? 'text-lg sm:text-xl' : 'text-xl sm:text-2xl'}`}>{doctor.name}</h3>
+                      <Badge variant="outline" className="mt-1 px-3 py-0.5 text-xs font-medium" style={{ borderColor: colorValues.primary, color: colorValues.primary }}>
                         {doctor.specialization}
                       </Badge>
                     </div>
                   </div>
-                  <div className="flex items-center gap-1">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className={`h-4 w-4 ${i < Math.floor(doctor.rating) ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}`} />
-                    ))}
-                    <span className="text-sm text-slate-500 ml-2">({doctor.rating}) • {doctor.reviewCount} reviews</span>
+                  <div className="flex items-center gap-1 bg-slate-50 dark:bg-slate-700/50 p-2 rounded-lg w-fit">
+                    <div className="flex items-center">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className={`h-3.5 w-3.5 ${i < Math.floor(doctor.rating) ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}`} />
+                      ))}
+                    </div>
+                    <span className="text-xs font-semibold text-slate-700 dark:text-slate-200 ml-1">{doctor.rating}</span>
+                    <span className="text-[10px] text-slate-500 dark:text-slate-400 hidden sm:inline ml-1">({doctor.reviewCount} rev.)</span>
                   </div>
                 </div>
 

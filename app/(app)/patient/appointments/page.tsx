@@ -12,10 +12,22 @@ import { useAuth } from '@/lib/auth-context'
 import { BookAppointmentDialog } from '@/components/patient/dialogs'
 import { useTheme } from '@/lib/theme-context'
 
+interface Appointment {
+  id: string
+  doctor_name: string
+  appointment_date: string
+  appointment_time: string
+  appointment_type: string
+  status: string
+  reason?: string
+  condition?: string
+  specialization?: string
+}
+
 export default function AppointmentsPage() {
   const { user } = useAuth()
   const { getColorValues } = useTheme()
-  const [appointments, setAppointments] = useState([])
+  const [appointments, setAppointments] = useState<Appointment[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [viewMode, setViewMode] = useState('grid')
   const [searchTerm, setSearchTerm] = useState('')
@@ -212,31 +224,35 @@ export default function AppointmentsPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <Card className="p-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div>
-            <h1 className="text-3xl font-bold text-foreground">My Appointments</h1>
-            <p className="text-muted-foreground">Manage your healthcare appointments and schedule</p>
+      <Card className="p-4 sm:p-6">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div className="space-y-1">
+            <h1 className="text-2xl sm:text-3xl font-bold text-foreground">My Appointments</h1>
+            <p className="text-sm sm:text-base text-muted-foreground">Manage your healthcare appointments and schedule</p>
           </div>
-          <div className="flex gap-2">
-            <Button 
-              variant={viewMode === 'grid' ? 'default' : 'outline'}
-              size="sm"
-              onClick={() => setViewMode('grid')}
-            >
-              <Grid className="h-4 w-4 mr-2" />
-              Grid
-            </Button>
-            <Button 
-              variant={viewMode === 'list' ? 'default' : 'outline'}
-              size="sm"
-              onClick={() => setViewMode('list')}
-            >
-              <List className="h-4 w-4 mr-2" />
-              List
-            </Button>
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+            <div className="flex bg-muted/50 p-1 rounded-lg w-full sm:w-auto">
+              <Button 
+                variant={viewMode === 'grid' ? 'secondary' : 'ghost'}
+                size="sm"
+                onClick={() => setViewMode('grid')}
+                className="flex-1 sm:flex-none h-8 text-xs"
+              >
+                <Grid className="h-3.5 w-3.5 mr-1.5" />
+                Grid
+              </Button>
+              <Button 
+                variant={viewMode === 'list' ? 'secondary' : 'ghost'}
+                size="sm"
+                onClick={() => setViewMode('list')}
+                className="flex-1 sm:flex-none h-8 text-xs"
+              >
+                <List className="h-3.5 w-3.5 mr-1.5" />
+                List
+              </Button>
+            </div>
             <BookAppointmentDialog onSuccess={() => setRefreshTrigger(prev => prev + 1)}>
-              <Button style={{ backgroundColor: colorValues.primary }} className="text-white">
+              <Button style={{ backgroundColor: colorValues.primary }} className="text-white w-full sm:w-auto h-10 shadow-md">
                 <Plus className="h-4 w-4 mr-2" />
                 Book Appointment
               </Button>

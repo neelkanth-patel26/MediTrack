@@ -319,24 +319,24 @@ export default function DoctorDashboard() {
     <div className="space-y-6">
       {/* Welcome Header */}
       <Card className="p-6">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-4xl font-bold text-foreground mb-2">
+            <h1 className="text-2xl sm:text-4xl font-bold text-foreground mb-2">
               Good morning, Dr. {user?.name?.split(' ')[1] || user?.name}!
             </h1>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-base sm:text-lg text-muted-foreground">
               You have {doctorStats?.totalAppointments || 0} total appointments with {doctorStats?.completedAppointments || 0} completed
             </p>
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             <ViewDetailsDialog title="Alerts & Announcements" data={{alerts: criticalAlerts.length, announcements: announcements.length, highPriority: criticalAlerts.filter(a => a.severity === 'high').length, mediumPriority: criticalAlerts.filter(a => a.severity === 'medium').length, lastUpdate: criticalAlerts[0]?.time || 'No recent alerts', recentAnnouncements: announcements.slice(0, 3).map(a => `${a.title} - ${a.priority}`).join(', ') || 'No announcements'}}>
-              <Button variant="outline">
+              <Button variant="outline" className="flex-1 sm:flex-none">
                 <Bell className="h-4 w-4 mr-2" />
                 Alerts ({criticalAlerts.length + announcements.length})
               </Button>
             </ViewDetailsDialog>
             <SendMessageDialog>
-              <Button style={{ backgroundColor: colorValues.primary }} className="text-white">
+              <Button style={{ backgroundColor: colorValues.primary }} className="text-white flex-1 sm:flex-none">
                 <Plus className="h-4 w-4 mr-2" />
                 Quick Note
               </Button>

@@ -56,7 +56,8 @@ export default function LandingPage() {
   const [contactForm, setContactForm] = useState({ name: '', email: '', phone: '', message: '' })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showSuccessModal, setShowSuccessModal] = useState(false)
-  const { color, isDarkMode } = useTheme()
+  const { color, isDarkMode, getColorValues } = useTheme()
+  const colorValues = getColorValues()
 
   // Scroll animation refs
   const heroRef = useRef<HTMLDivElement>(null)
@@ -237,36 +238,34 @@ export default function LandingPage() {
           </button>
         </div>
 
-        <div className={`md:hidden overflow-hidden transition-all duration-700 ease-out ${mobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
-          <div className={`${isDarkMode ? 'bg-background/90' : 'bg-background/90'} backdrop-blur-2xl border-t border-border/30 p-6 space-y-4 shadow-2xl rounded-b-3xl`}>
-            <a href="#home" className="block hover:text-orange-400 text-lg font-medium py-3 px-4 rounded-2xl hover:bg-accent/50 transition-all duration-300 hover:translate-x-2 hover:shadow-md" onClick={() => setMobileMenuOpen(false)}>
-              Home
-            </a>
-            <a href="#how-it-works" className="block hover:text-orange-400 text-lg font-medium py-3 px-4 rounded-2xl hover:bg-accent/50 transition-all duration-300 hover:translate-x-2 hover:shadow-md" onClick={() => setMobileMenuOpen(false)}>
-              How It Works
-            </a>
-            <a href="#services" className="block hover:text-orange-400 text-lg font-medium py-3 px-4 rounded-2xl hover:bg-accent/50 transition-all duration-300 hover:translate-x-2 hover:shadow-md" onClick={() => setMobileMenuOpen(false)}>
-              Services
-            </a>
-            <a href="#features" className="block hover:text-orange-400 text-lg font-medium py-3 px-4 rounded-2xl hover:bg-accent/50 transition-all duration-300 hover:translate-x-2 hover:shadow-md" onClick={() => setMobileMenuOpen(false)}>
-              Features
-            </a>
-            <a href="#testimonials" className="block hover:text-orange-400 text-lg font-medium py-3 px-4 rounded-2xl hover:bg-accent/50 transition-all duration-300 hover:translate-x-2 hover:shadow-md" onClick={() => setMobileMenuOpen(false)}>
-              Testimonials
-            </a>
-            <a href="#contact" className="block hover:text-orange-400 text-lg font-medium py-3 px-4 rounded-2xl hover:bg-accent/50 transition-all duration-300 hover:translate-x-2 hover:shadow-md" onClick={() => setMobileMenuOpen(false)}>
-              Contact
-            </a>
-            <div className="flex gap-3 pt-4 border-t border-border/30">
+        <div className={`md:hidden overflow-hidden transition-all duration-500 ease-in-out ${mobileMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'}`}>
+          <div className={`${isDarkMode ? 'bg-background/95' : 'bg-background/95'} backdrop-blur-2xl border-t border-border/30 p-4 space-y-1 shadow-2xl rounded-b-3xl`}>
+            {[
+              { label: 'Home', href: '#home' },
+              { label: 'How It Works', href: '#how-it-works' },
+              { label: 'Services', href: '#services' },
+              { label: 'Features', href: '#features' },
+              { label: 'Testimonials', href: '#testimonials' },
+              { label: 'Contact', href: '#contact' }
+            ].map((item) => (
+              <a 
+                key={item.label}
+                href={item.href} 
+                className="block hover:text-orange-400 text-lg font-medium py-4 px-5 rounded-2xl hover:bg-orange-500/10 transition-all duration-300"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {item.label}
+              </a>
+            ))}
+            <div className="flex gap-3 pt-6 pb-2 border-t border-border/30 mt-2">
               <Link href="/login" className="flex-1" onClick={() => setMobileMenuOpen(false)}>
-                <Button variant="ghost" className={`w-full ${isDarkMode ? 'text-foreground hover:bg-accent/80' : 'text-foreground hover:bg-accent/80'} text-lg py-3 rounded-2xl transition-all duration-300`}>
+                <Button variant="outline" className="w-full h-14 text-lg py-3 rounded-2xl transition-all duration-300">
                   Login
                 </Button>
               </Link>
               <Link href="/signup" className="flex-1" onClick={() => setMobileMenuOpen(false)}>
-                <Button className={`w-full bg-gradient-to-r ${colorClasses.primary} text-lg py-3 rounded-2xl shadow-xl transition-all duration-300 font-semibold`}>
-                  Get Started
-                  <ArrowRight className="w-4 h-4 ml-2" />
+                <Button className={`w-full h-14 bg-gradient-to-r ${colorClasses.primary} text-lg py-3 rounded-2xl shadow-xl transition-all duration-300 font-semibold`}>
+                  Start <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </Link>
             </div>
@@ -278,76 +277,81 @@ export default function LandingPage() {
       <div className="h-32"></div>
 
       {/* Hero Section */}
-      <section ref={heroRef} id="home" className="relative max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-40">
-        {/* Floating decorative elements */}
-        <div className={`absolute top-20 left-10 transition-all duration-1000 ${heroVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+      <section ref={heroRef} id="home" className="relative max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-40 overflow-hidden">
+        {/* Floating decorative elements - Hide on small mobile to reduce clutter */}
+        <div className={`hidden sm:block absolute top-20 left-10 transition-all duration-1000 ${heroVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
           <div className="w-16 h-16 bg-gradient-to-br from-orange-400/20 to-pink-400/20 rounded-full flex items-center justify-center backdrop-blur-sm">
             <Heart className="w-8 h-8 text-orange-400 animate-pulse" />
           </div>
         </div>
-        <div className={`absolute top-32 right-16 transition-all duration-1000 delay-200 ${heroVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+        <div className={`hidden sm:block absolute top-32 right-16 transition-all duration-1000 delay-200 ${heroVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
           <div className="w-12 h-12 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-lg flex items-center justify-center backdrop-blur-sm rotate-12">
             <Stethoscope className="w-6 h-6 text-blue-400 animate-pulse" />
           </div>
         </div>
-        <div className={`absolute bottom-32 left-16 transition-all duration-1000 delay-400 ${heroVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+        <div className={`hidden sm:block absolute bottom-32 left-16 transition-all duration-1000 delay-400 ${heroVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
           <div className="w-14 h-14 bg-gradient-to-br from-green-400/20 to-teal-400/20 rounded-full flex items-center justify-center backdrop-blur-sm">
             <Activity className="w-7 h-7 text-green-400 animate-pulse" />
           </div>
         </div>
-        <div className={`absolute bottom-20 right-20 transition-all duration-1000 delay-600 ${heroVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-          <div className="w-10 h-10 bg-gradient-to-br from-purple-400/20 to-pink-400/20 rounded-lg flex items-center justify-center backdrop-blur-sm -rotate-12">
-            <Pill className="w-5 h-5 text-purple-400 animate-pulse" />
-          </div>
-        </div>
 
         <div className={`text-center relative z-10 transition-all duration-1000 ${heroVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
-          <div className={`inline-block px-4 py-2 bg-orange-500/10 border border-orange-500/20 rounded-full text-orange-400 font-medium mb-6 transition-all duration-1000 delay-200 ${heroVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+          <div className={`inline-block px-4 py-2 bg-orange-500/10 border border-orange-500/20 rounded-full text-orange-400 font-medium mb-6 transition-all duration-1000 delay-200 ${heroVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'} text-sm sm:text-base`}>
             <Rocket className="w-4 h-4 inline mr-2 animate-bounce" />
-            Next-Generation Healthcare Technology
+            Next-Gen AI Healthcare
           </div>
-          <h1 className={`text-4xl sm:text-5xl md:text-7xl font-extrabold leading-[1.1] sm:leading-tight transition-all duration-1000 delay-400 ${heroVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'}`}>
+          <h1 className={`text-3xl sm:text-5xl md:text-7xl font-extrabold leading-tight transition-all duration-1000 delay-400 ${heroVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'}`}>
             Transform Your <span className="inline sm:block bg-gradient-to-r from-orange-600 to-orange-700 bg-clip-text text-transparent animate-gradient">
               Healthcare Practice
             </span> with AI
           </h1>
-          <p className={`mt-6 text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto px-4 sm:px-0 transition-all duration-1000 delay-600 ${heroVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
-            Join thousands of healthcare professionals who trust MediTrack+ for intelligent patient management, AI-powered diagnostics, and seamless practice operations. Experience the future of healthcare today.
+          <p className={`mt-6 text-base sm:text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto px-2 sm:px-0 transition-all duration-1000 delay-600 ${heroVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+            Join thousands of professionals using MediTrack+ for intelligent patient management and AI-powered diagnostics.
           </p>
-          <div className={`mt-10 flex flex-col sm:flex-row gap-4 justify-center transition-all duration-1000 delay-800 ${heroVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
-            <Link href="/signup">
-              <Button className={`w-full sm:w-auto bg-gradient-to-r ${colorClasses.primary} ${colorClasses.primaryHover} h-14 text-xl px-8 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl`}>
-                Start Free Trial <ArrowRight className="ml-2 w-5 h-5 animate-pulse" />
+          <div className={`mt-8 sm:mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center transition-all duration-1000 delay-800 ${heroVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+            <Link href="/signup" className="w-full sm:w-auto">
+              <Button className={`w-full sm:w-auto bg-gradient-to-r ${colorClasses.primary} ${colorClasses.primaryHover} h-14 text-lg sm:text-xl px-10 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl rounded-2xl`}>
+                Start Free <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>
+            <div className="flex -space-x-3 items-center mt-4 sm:mt-0">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="w-10 h-10 rounded-full border-2 border-background bg-slate-200 dark:bg-slate-700 flex items-center justify-center overflow-hidden">
+                  <div className="w-full h-full bg-gradient-to-br from-slate-400 to-slate-500" />
+                </div>
+              ))}
+              <div className="ml-4 text-sm font-medium text-muted-foreground">
+                <span className="text-foreground">500+</span> doctors joined this week
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Stats Section */}
-      <section ref={statsRef} className="py-16 relative">
+      <section ref={statsRef} className="py-12 sm:py-20 relative overflow-hidden">
         {/* Decorative background elements */}
         <div className={`absolute top-8 left-8 w-20 h-20 bg-gradient-to-br from-orange-400/10 to-pink-400/10 rounded-full blur-xl transition-all duration-1000 ${statsVisible ? 'scale-100 opacity-100' : 'scale-75 opacity-0'}`}></div>
         <div className={`absolute bottom-8 right-8 w-16 h-16 bg-gradient-to-br from-blue-400/10 to-purple-400/10 rounded-full blur-lg transition-all duration-1000 delay-200 ${statsVisible ? 'scale-100 opacity-100' : 'scale-75 opacity-0'}`}></div>
 
         <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
             {[
-              { number: '50K+', label: 'Healthcare Professionals', icon: Users },
-              { number: '99.7%', label: 'Diagnostic Accuracy', icon: Brain },
-              { number: '24/7', label: 'Support Available', icon: Shield },
-              { number: '100%', label: 'HIPAA Compliant', icon: CheckCircle2 }
+              { number: '50K+', label: 'Doctors', icon: Users },
+              { number: '99.7%', label: 'Accuracy', icon: Brain },
+              { number: '24/7', label: 'Support', icon: Shield },
+              { number: '100%', label: 'Secure', icon: CheckCircle2 }
             ].map((stat, i) => {
               const Icon = stat.icon;
               return (
-                <div key={i} className={`text-center group hover:scale-105 transition-all duration-500 ${statsVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`} style={{transitionDelay: `${i * 0.2 + 0.4}s`}}>
-                  <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-orange-500/20 to-orange-600/20 rounded-full flex items-center justify-center group-hover:from-orange-500/40 group-hover:to-orange-600/40 transition-all duration-300 shadow-lg">
-                    <Icon className="w-8 h-8 text-orange-400 group-hover:scale-110 transition-transform duration-300" />
+                <div key={i} className={`p-4 sm:p-6 text-center group hover:scale-105 transition-all duration-500 rounded-2xl bg-slate-500/5 border border-slate-500/10 ${statsVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`} style={{transitionDelay: `${i * 0.1 + 0.2}s`}}>
+                  <div className="w-12 h-12 sm:w-16 h-16 mx-auto mb-3 sm:mb-4 bg-gradient-to-br from-orange-500/20 to-orange-600/20 rounded-2xl flex items-center justify-center group-hover:from-orange-500/40 group-hover:to-orange-600/40 transition-all duration-300">
+                    <Icon className="w-6 h-6 sm:w-8 h-8 text-orange-400 group-hover:scale-110 transition-transform duration-300" />
                   </div>
-                  <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-orange-600 to-orange-700 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300">
+                  <div className="text-2xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-orange-600 to-orange-700 bg-clip-text text-transparent mb-1 sm:mb-2">
                     {stat.number}
                   </div>
-                  <div className="text-muted-foreground font-medium">{stat.label}</div>
+                  <div className="text-xs sm:text-sm md:text-base text-muted-foreground font-medium uppercase tracking-wider">{stat.label}</div>
                 </div>
               );
             })}
@@ -369,47 +373,37 @@ export default function LandingPage() {
       </section>
 
       {/* How It Works Section */}
-      <section ref={howItWorksRef} id="how-it-works" className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative">
-        {/* Background decorative elements */}
-        <div className={`absolute top-10 right-10 w-32 h-32 bg-gradient-to-br from-orange-400/5 to-pink-400/5 rounded-full blur-2xl transition-all duration-1000 ${howItWorksVisible ? 'scale-100 opacity-100' : 'scale-75 opacity-0'}`}></div>
-        <div className={`absolute bottom-10 left-10 w-24 h-24 bg-gradient-to-br from-blue-400/5 to-purple-400/5 rounded-full blur-xl transition-all duration-1000 delay-200 ${howItWorksVisible ? 'scale-100 opacity-100' : 'scale-75 opacity-0'}`}></div>
-
-        <div className={`text-center mb-16 relative z-10 transition-all duration-1000 ${howItWorksVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
-          <div className={`inline-block px-4 py-2 bg-orange-500/10 border border-orange-500/20 rounded-full text-orange-400 font-medium mb-4 transition-all duration-1000 delay-200 ${howItWorksVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
-            <Zap className="w-4 h-4 inline mr-2 animate-bounce" />
-            Simple 4-Step Process
+      <section ref={howItWorksRef} id="how-it-works" className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 relative overflow-hidden">
+        <div className={`text-center mb-12 sm:mb-20 relative z-10 transition-all duration-1000 ${howItWorksVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+          <div className={`inline-block px-4 py-2 bg-orange-500/10 border border-orange-500/20 rounded-full text-orange-400 font-medium mb-4 transition-all duration-1000 delay-200 ${howItWorksVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'} text-sm sm:text-base`}>
+            <Zap className="w-4 h-4 inline mr-2" />
+            Simple Process
           </div>
-          <h2 className={`text-4xl md:text-5xl font-bold mb-4 transition-all duration-1000 delay-400 ${howItWorksVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'}`}>
-            How <span className="bg-gradient-to-r from-orange-600 to-orange-700 bg-clip-text text-transparent animate-gradient">MediTrack+</span> Works
+          <h2 className={`text-3xl sm:text-5xl font-bold mb-4 transition-all duration-1000 delay-400 ${howItWorksVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'}`}>
+            How <span className="bg-gradient-to-r from-orange-600 to-orange-700 bg-clip-text text-transparent">MediTrack+</span> Works
           </h2>
-          <p className={`text-xl text-muted-foreground max-w-2xl mx-auto transition-all duration-1000 delay-600 ${howItWorksVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
-            Get started in minutes with our intuitive platform designed for healthcare professionals.
+          <p className={`text-base sm:text-xl text-muted-foreground max-w-2xl mx-auto px-2 transition-all duration-1000 delay-600 ${howItWorksVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+            Get started in minutes with our intuitive platform designed for professionals.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-4 gap-8 relative z-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 relative z-10">
           {[
-            { icon: Users, title: '1. Sign Up & Setup', desc: 'Create your account and configure your practice settings. Our guided setup ensures you\'re ready to go in under 10 minutes.', color: 'from-blue-500 to-blue-600' },
-            { icon: Shield, title: '2. Import Patient Data', desc: 'Securely import existing patient records or start fresh. Our HIPAA-compliant system ensures complete data security.', color: 'from-green-500 to-green-600' },
-            { icon: Brain, title: '3. AI-Powered Care', desc: 'Leverage our AI diagnostics for faster, more accurate assessments. Access real-time insights and treatment recommendations.', color: 'from-purple-500 to-purple-600' },
-            { icon: TrendingUp, title: '4. Scale & Optimize', desc: 'Monitor performance with detailed analytics. Expand your practice with mobile access, telemedicine, and automated workflows.', color: 'from-orange-500 to-orange-600' },
+            { icon: Users, title: 'Setup', desc: 'Create your account and configure settings in under 10 mins.', color: 'from-blue-500 to-blue-600' },
+            { icon: Shield, title: 'Import', desc: 'Securely sync records via our HIPAA-compliant system.', color: 'from-green-500 to-green-600' },
+            { icon: Brain, title: 'Care', desc: 'Leverage AI diagnostics for faster, accurate assessments.', color: 'from-purple-500 to-purple-600' },
+            { icon: TrendingUp, title: 'Scale', desc: 'Monitor performance and expand with automated workflows.', color: 'from-orange-500 to-orange-600' },
           ].map((step, i) => {
             const Icon = step.icon;
             return (
-              <div key={i} className={`relative p-8 rounded-2xl ${isDarkMode ? 'bg-card/50 border border-border' : 'bg-card/80 border border-border'} transition-all duration-500 hover:shadow-lg hover:-translate-y-2 ${howItWorksVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`} style={{transitionDelay: `${i * 0.2 + 0.8}s`}}>
-                <div className={`mb-4 inline-block p-4 bg-gradient-to-br ${step.color} rounded-full shadow-lg transition-all duration-300 hover:scale-110`}>
-                  <Icon className="w-8 h-8 text-white animate-pulse" />
+              <div key={i} className={`relative p-6 sm:p-8 rounded-3xl ${isDarkMode ? 'bg-card/40 border border-border' : 'bg-white border border-border'} transition-all duration-500 hover:shadow-xl hover:-translate-y-1 ${howItWorksVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`} style={{transitionDelay: `${i * 0.1 + 0.6}s`}}>
+                <div className={`mb-6 inline-block p-4 bg-gradient-to-br ${step.color} rounded-2xl shadow-lg transition-all duration-300`}>
+                  <Icon className="w-6 h-6 sm:w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-2xl font-semibold mb-2">{step.title}</h3>
-                <p className="text-muted-foreground">{step.desc}</p>
-                {i < 3 && (
-                  <div className="hidden md:block absolute top-1/2 -right-4 transform -translate-y-1/2 text-orange-400 text-2xl animate-pulse">
-                    →
-                  </div>
-                )}
-                {/* Step number badge */}
-                <div className="absolute -top-4 -left-4 w-8 h-8 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg animate-bounce" style={{animationDelay: `${i * 0.5}s`}}>
-                  {i + 1}
+                <h3 className="text-xl sm:text-2xl font-semibold mb-3">{step.title}</h3>
+                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{step.desc}</p>
+                <div className="absolute top-6 right-6 text-4xl font-bold opacity-5 select-none">
+                  0{i + 1}
                 </div>
               </div>
             )
@@ -418,46 +412,39 @@ export default function LandingPage() {
       </section>
       
       {/* Services Section */}
-      <section ref={servicesRef} id="services" className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative">
-        {/* Background decorative elements */}
-        <div className={`absolute top-0 left-1/4 w-64 h-64 bg-gradient-to-br from-orange-400/5 to-pink-400/5 rounded-full blur-3xl transition-all duration-1000 ${servicesVisible ? 'scale-100 opacity-100' : 'scale-75 opacity-0'}`}></div>
-        <div className={`absolute bottom-0 right-1/4 w-48 h-48 bg-gradient-to-br from-blue-400/5 to-purple-400/5 rounded-full blur-2xl transition-all duration-1000 delay-200 ${servicesVisible ? 'scale-100 opacity-100' : 'scale-75 opacity-0'}`}></div>
-        <div className={`absolute top-1/2 left-0 w-32 h-32 bg-gradient-to-br from-green-400/5 to-teal-400/5 rounded-full blur-xl transition-all duration-1000 delay-400 ${servicesVisible ? 'scale-100 opacity-100' : 'scale-75 opacity-0'}`}></div>
-
-        <div className={`text-center mb-16 relative z-10 transition-all duration-1000 ${servicesVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
-          <div className={`inline-block px-4 py-2 bg-orange-500/10 border border-orange-500/20 rounded-full text-orange-400 font-medium mb-4 transition-all duration-1000 delay-200 ${servicesVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
-            <Hospital className="w-4 h-4 inline mr-2 animate-bounce" />
-            Comprehensive Healthcare Solutions
+      <section ref={servicesRef} id="services" className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 relative">
+        <div className={`text-center mb-12 sm:mb-20 relative z-10 transition-all duration-1000 ${servicesVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+          <div className={`inline-block px-4 py-2 bg-orange-500/10 border border-orange-500/20 rounded-full text-orange-400 font-medium mb-4 text-sm sm:text-base`}>
+            <Hospital className="w-4 h-4 inline mr-2" />
+            Healthcare Solutions
           </div>
-          <h2 className={`text-4xl md:text-5xl font-bold mb-4 transition-all duration-1000 delay-400 ${servicesVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'}`}>
-            Complete <span className="bg-gradient-to-r from-orange-600 to-orange-700 bg-clip-text text-transparent animate-gradient">Healthcare Platform</span>
+          <h2 className={`text-3xl sm:text-5xl font-bold mb-4 transition-all duration-1000 delay-400 ${servicesVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'}`}>
+            Complete <span className="bg-gradient-to-r from-orange-600 to-orange-700 bg-clip-text text-transparent">Healthcare Platform</span>
           </h2>
-          <p className={`text-xl text-muted-foreground max-w-3xl mx-auto transition-all duration-1000 delay-600 ${servicesVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
-            Everything you need to manage your practice efficiently, from patient intake to treatment planning and follow-up care.
+          <p className={`text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto px-2 transition-all duration-1000 delay-600 ${servicesVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+            Everything you need to manage your practice efficiently, from patient intake to treatment planning.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 relative z-10">
           {[
-            { icon: Brain, title: 'AI-Powered Diagnostics', desc: 'Advanced machine learning algorithms provide diagnostic assistance with 99.7% accuracy. Get instant second opinions and treatment recommendations.', color: 'from-blue-500/20 to-blue-600/20' },
-            { icon: Users, title: 'Smart Patient Management', desc: 'Comprehensive EHR system with intelligent scheduling, automated reminders, and predictive analytics for patient no-shows.', color: 'from-green-500/20 to-green-600/20' },
-            { icon: Pill, title: 'Intelligent Prescription System', desc: 'Digital prescriptions with real-time drug interaction checking, allergy alerts, and formulary compliance.', color: 'from-purple-500/20 to-purple-600/20' },
-            { icon: TrendingUp, title: 'Advanced Analytics Dashboard', desc: 'Real-time insights into practice performance, patient outcomes, and operational efficiency.', color: 'from-orange-500/20 to-orange-600/20' },
-            { icon: Download, title: 'Mobile-First Design', desc: 'Access patient information anywhere with our responsive mobile app. Dictate notes and manage prescriptions on-the-go.', color: 'from-pink-500/20 to-pink-600/20' },
-            { icon: Shield, title: 'Enterprise Security', desc: 'Bank-level encryption, multi-factor authentication, and comprehensive audit trails. Fully HIPAA, GDPR, and SOC 2 compliant.', color: 'from-indigo-500/20 to-indigo-600/20' },
-            { icon: Video, title: 'Telemedicine Integration', desc: 'Built-in video consultations with secure patient portals. Expand your reach and provide convenient care.', color: 'from-teal-500/20 to-teal-600/20' },
-            { icon: Bot, title: 'Automation & AI', desc: 'Automate routine tasks with AI-powered workflows. From appointment scheduling to insurance claims, let our intelligent system handle the busy work.', color: 'from-cyan-500/20 to-cyan-600/20' },
+            { icon: Brain, title: 'AI Diagnostics', desc: 'Assistive ML providing diagnostic insights with high accuracy.', color: 'from-blue-500/20 to-blue-600/20' },
+            { icon: Users, title: 'Patient Management', desc: 'Secure EHR system with smart scheduling and analytics.', color: 'from-green-500/20 to-green-600/20' },
+            { icon: Pill, title: 'Digital Prescriptions', desc: 'Smart prescribing with real-time interaction and allergy alerts.', color: 'from-purple-500/20 to-purple-600/20' },
+            { icon: TrendingUp, title: 'Advanced Analytics', desc: 'Real-time practice performance and patient outcome tracking.', color: 'from-orange-500/20 to-orange-600/20' },
+            { icon: Sparkles, title: 'Mobile-First', desc: 'Responsive experience designed for native feel on any device.', color: 'from-pink-500/20 to-pink-600/20' },
+            { icon: Shield, title: 'Secure & HIPAA', desc: 'Enterprise security with full compliance and data encryption.', color: 'from-indigo-500/20 to-indigo-600/20' },
+            { icon: Video, title: 'Telemedicine', desc: 'Built-in secure video consultations with patient portals.', color: 'from-teal-500/20 to-teal-600/20' },
+            { icon: Bot, title: 'Workflow AI', desc: 'Automate scheduling, insurance claims, and routine tasks.', color: 'from-cyan-500/20 to-cyan-600/20' },
           ].map((service, i) => {
             const Icon = service.icon
             return (
-              <div key={i} className={`group p-8 ${isDarkMode ? 'bg-card/50 border border-border hover:border-orange-500/50' : 'bg-card/80 border border-border hover:border-orange-500/50'} rounded-2xl transition-all duration-500 cursor-pointer hover:shadow-lg hover:-translate-y-2 ${servicesVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`} style={{transitionDelay: `${i * 0.1 + 0.8}s`}}>
-                <div className="mb-4 inline-block p-3 bg-gradient-to-br from-orange-500/20 to-orange-600/20 rounded-lg group-hover:from-orange-500/40 group-hover:to-orange-600/40 transition-all duration-300 relative">
-                  <Icon className="w-6 h-6 text-orange-400 group-hover:animate-pulse" />
-                  {/* Floating particle effect */}
-                  <div className="absolute -top-1 -right-1 w-2 h-2 bg-orange-400 rounded-full animate-ping opacity-75"></div>
+              <div key={i} className={`group p-6 sm:p-8 ${isDarkMode ? 'bg-card/40 border border-border hover:border-orange-500/50' : 'bg-white border border-border hover:border-orange-500/50'} rounded-3xl transition-all duration-500 cursor-pointer hover:shadow-xl hover:-translate-y-1 ${servicesVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`} style={{transitionDelay: `${i * 0.05 + 0.6}s`}}>
+                <div className="mb-5 inline-block p-4 bg-orange-500/10 rounded-2xl group-hover:bg-orange-500/20 transition-all duration-300">
+                  <Icon className="w-6 h-6 text-orange-600 dark:text-orange-400 group-hover:scale-110 transition-transform" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2 group-hover:text-orange-400 transition-colors">{service.title}</h3>
-                <p className="text-muted-foreground">{service.desc}</p>
+                <h3 className="text-lg sm:text-xl font-semibold mb-2 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">{service.title}</h3>
+                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{service.desc}</p>
               </div>
             )
           })}
@@ -465,41 +452,37 @@ export default function LandingPage() {
       </section>
 
       {/* Advanced Features Section */}
-      <section ref={featuresRef} id="features" className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative">
-        {/* Background decorative elements */}
-        <div className={`absolute top-12 right-12 w-48 h-48 bg-gradient-to-br from-purple-400/5 to-pink-400/5 rounded-full blur-3xl transition-all duration-1000 ${featuresVisible ? 'scale-100 opacity-100' : 'scale-75 opacity-0'}`}></div>
-        <div className={`absolute bottom-12 left-12 w-36 h-36 bg-gradient-to-br from-blue-400/5 to-cyan-400/5 rounded-full blur-2xl transition-all duration-1000 delay-300 ${featuresVisible ? 'scale-100 opacity-100' : 'scale-75 opacity-0'}`}></div>
-
-        <div className={`text-center mb-16 relative z-10 transition-all duration-1000 ${featuresVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
-          <div className={`inline-block px-4 py-2 bg-orange-500/10 border border-orange-500/20 rounded-full text-orange-400 font-medium mb-4 transition-all duration-1000 delay-200 ${featuresVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
-            <Sparkles className="w-4 h-4 inline mr-2 animate-bounce" />
-            Advanced Features
+      <section ref={featuresRef} id="features" className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 relative overflow-hidden">
+        <div className={`text-center mb-12 sm:mb-20 relative z-10 transition-all duration-1000 ${featuresVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+          <div className={`inline-block px-4 py-2 bg-orange-500/10 border border-orange-500/20 rounded-full text-orange-400 font-medium mb-4 text-sm sm:text-base`}>
+            <Sparkles className="w-4 h-4 inline mr-2" />
+            Cutting-Edge Features
           </div>
-          <h2 className={`text-4xl md:text-5xl font-bold mb-4 transition-all duration-1000 delay-400 ${featuresVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'}`}>
-            Built for <span className="bg-gradient-to-r from-orange-600 to-orange-700 bg-clip-text text-transparent animate-gradient">Modern Healthcare</span>
+          <h2 className={`text-3xl sm:text-5xl font-bold mb-4 transition-all duration-1000 delay-400 ${featuresVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'}`}>
+            Built for <span className="bg-gradient-to-r from-orange-600 to-orange-700 bg-clip-text text-transparent">Modern Healthcare</span>
           </h2>
-          <p className={`text-xl text-muted-foreground max-w-3xl mx-auto transition-all duration-1000 delay-600 ${featuresVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
-            Cutting-edge features that set MediTrack+ apart from traditional EHR systems.
+          <p className={`text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto px-2 transition-all duration-1000 delay-600 ${featuresVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+            Cutting-edge features that set MediTrack+ apart from traditional systems.
           </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 relative z-10">
           {[
-            { icon: Infinity, title: 'Offline Mode', desc: 'Never lose productivity during connectivity issues. Our offline-first architecture ensures you can continue working seamlessly.' },
-            { icon: Zap, title: 'Real-Time Sync', desc: 'Instant synchronization across all devices. Changes made on one device appear everywhere in real-time.' },
-            { icon: Brain, title: 'AI Assistant', desc: 'Intelligent assistant that learns your preferences and automates routine tasks, freeing you to focus on patient care.' },
-            { icon: Cloud, title: 'Cloud-Native', desc: 'Built for the cloud with automatic scaling, disaster recovery, and global accessibility from day one.' },
-            { icon: Lock, title: 'Zero-Trust Security', desc: 'Every request is authenticated and authorized. No data leaves our secure perimeter without explicit permission.' },
-            { icon: Code, title: 'API-First Design', desc: 'Comprehensive REST APIs allow seamless integration with existing systems, labs, and third-party applications.' },
+            { icon: Infinity, title: 'Offline Mode', desc: 'Maintain productivity during connectivity issues. Our offline-first tech ensures seamless work.' },
+            { icon: Zap, title: 'Real-Time Sync', desc: 'Instant synchronization across devices. Changes appear everywhere in real-time.' },
+            { icon: Brain, title: 'AI Assistant', desc: 'Intelligent assistant that learns your workflow and automates routine practice tasks.' },
+            { icon: Cloud, title: 'Cloud-Native', desc: 'Built for scale with automatic disaster recovery and global accessibility from day one.' },
+            { icon: Lock, title: 'Zero-Trust', desc: 'Every request is authenticated and authorized within our secure perimeter.' },
+            { icon: Code, title: 'API-First', desc: 'REST APIs allow seamless integration with existing labs and third-party apps.' },
           ].map((feature, i) => {
             const Icon = feature.icon
             return (
-              <div key={i} className={`group p-8 ${isDarkMode ? 'bg-card/50 border border-border hover:border-orange-500/50' : 'bg-card/80 border border-border hover:border-orange-500/50'} rounded-2xl transition-all duration-500 hover:shadow-lg hover:-translate-y-2 ${featuresVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`} style={{transitionDelay: `${i * 0.15 + 0.8}s`}}>
-                <div className="mb-4 inline-block p-4 bg-gradient-to-br from-orange-500/20 to-orange-600/20 rounded-full group-hover:from-orange-500/40 group-hover:to-orange-600/40 transition-colors animate-pulse" style={{animationDelay: `${i * 0.2}s`}}>
-                  <Icon className="w-8 h-8 text-orange-400" />
+              <div key={i} className={`group p-6 sm:p-8 ${isDarkMode ? 'bg-card/40 border border-border hover:border-orange-500/50' : 'bg-white border border-border hover:border-orange-500/50'} rounded-3xl transition-all duration-500 hover:shadow-xl hover:-translate-y-1 ${featuresVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`} style={{transitionDelay: `${i * 0.1 + 0.6}s`}}>
+                <div className="mb-5 inline-block p-4 bg-orange-500/10 rounded-2xl group-hover:bg-orange-500/20 transition-all duration-300">
+                  <Icon className="w-6 h-6 text-orange-600 dark:text-orange-400" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2 group-hover:text-orange-400 transition-colors">{feature.title}</h3>
-                <p className="text-muted-foreground">{feature.desc}</p>
+                <h3 className="text-xl font-semibold mb-3 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors uppercase tracking-tight">{feature.title}</h3>
+                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{feature.desc}</p>
               </div>
             )
           })}
@@ -555,43 +538,37 @@ export default function LandingPage() {
       </section>
 
       {/* FAQ Section */}
-      <section ref={faqRef} className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative">
-        {/* Background decorative elements */}
-        <div className={`absolute top-16 left-16 w-32 h-32 bg-gradient-to-br from-green-400/5 to-emerald-400/5 rounded-full blur-xl transition-all duration-1000 ${faqVisible ? 'scale-100 opacity-100' : 'scale-75 opacity-0'}`}></div>
-        <div className={`absolute bottom-16 right-16 w-40 h-40 bg-gradient-to-br from-teal-400/5 to-cyan-400/5 rounded-full blur-2xl transition-all duration-1000 delay-300 ${faqVisible ? 'scale-100 opacity-100' : 'scale-75 opacity-0'}`}></div>
-
-        <div className={`text-center mb-16 relative z-10 transition-all duration-1000 ${faqVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
-          <div className={`inline-block px-4 py-2 bg-orange-500/10 border border-orange-500/20 rounded-full text-orange-400 font-medium mb-4 transition-all duration-1000 delay-200 ${faqVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
-            <HelpCircle className="w-4 h-4 inline mr-2 animate-bounce" />
-            Frequently Asked Questions
+      <section ref={faqRef} className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 relative">
+        <div className={`text-center mb-12 sm:mb-20 relative z-10 transition-all duration-1000 ${faqVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+          <div className={`inline-block px-4 py-2 bg-orange-500/10 border border-orange-500/20 rounded-full text-orange-400 font-medium mb-4 text-sm sm:text-base`}>
+            <HelpCircle className="w-4 h-4 inline mr-2" />
+            Support & FAQ
           </div>
-          <h2 className={`text-4xl md:text-5xl font-bold mb-4 transition-all duration-1000 delay-400 ${faqVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'}`}>
-            Your <span className="bg-gradient-to-r from-orange-600 to-orange-700 bg-clip-text text-transparent animate-gradient">Questions</span> Answered
+          <h2 className={`text-3xl sm:text-5xl font-bold mb-4 transition-all duration-1000 delay-400 ${faqVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'}`}>
+            Your <span className="bg-gradient-to-r from-orange-600 to-orange-700 bg-clip-text text-transparent">Questions</span> Answered
           </h2>
-          <p className={`text-xl text-muted-foreground max-w-2xl mx-auto transition-all duration-1000 delay-600 ${faqVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+          <p className={`text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-2 transition-all duration-1000 delay-600 ${faqVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
             Everything you need to know about getting started with MediTrack+.
           </p>
         </div>
 
-        <div className="space-y-4 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 relative z-10">
           {FAQ_ITEMS.map((faq, i) => (
-            <div key={i} className={`border ${isDarkMode ? 'border-border bg-card/50' : 'border-border bg-card/80'} rounded-xl overflow-hidden transition-all duration-500 ${faqVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`} style={{transitionDelay: `${i * 0.1 + 0.8}s`}}>
+            <div key={i} className={`border ${isDarkMode ? 'border-border bg-card/30' : 'border-border bg-white'} rounded-2xl overflow-hidden transition-all duration-500 ${faqVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`} style={{transitionDelay: `${i * 0.05 + 0.6}s`}}>
               <button
                 onClick={() => setExpandedFAQ(expandedFAQ === i ? null : i)}
-                className="w-full p-6 text-left flex justify-between items-center hover:bg-orange-500/5 transition-colors"
+                className="w-full p-5 sm:p-6 text-left flex justify-between items-center hover:bg-orange-500/5 transition-colors"
               >
-                <h3 className="text-lg font-semibold pr-4">{faq.question}</h3>
-                {expandedFAQ === i ? (
-                  <ChevronUp className="w-5 h-5 text-orange-400 flex-shrink-0 animate-bounce" />
-                ) : (
-                  <ChevronDown className="w-5 h-5 text-orange-400 flex-shrink-0 animate-bounce" />
-                )}
-              </button>
-              {expandedFAQ === i && (
-                <div className="px-6 pb-6 animate-fade-in-up">
-                  <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
+                <h3 className="text-base sm:text-lg font-semibold pr-4 leading-snug">{faq.question}</h3>
+                <div className={`p-2 rounded-full transition-all duration-300 ${expandedFAQ === i ? 'bg-orange-500 text-white rotate-180' : 'bg-orange-500/10 text-orange-500'}`}>
+                  <ChevronDown className="w-4 h-4" />
                 </div>
-              )}
+              </button>
+              <div className={`overflow-hidden transition-all duration-300 ease-in-out ${expandedFAQ === i ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+                <div className="px-5 sm:px-6 pb-6 text-sm sm:text-base text-muted-foreground leading-relaxed">
+                  {faq.answer}
+                </div>
+              </div>
             </div>
           ))}
         </div>
@@ -803,95 +780,94 @@ export default function LandingPage() {
     </div>
 
     {/* Footer */}
-    <footer className={`${isDarkMode ? 'bg-card/80 border-t border-border' : 'bg-card/80 border-t border-border'} backdrop-blur-sm mt-20`}>
-      <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <footer className="bg-slate-900 text-white pt-16 pb-8 border-t border-slate-800">
+      <div className="max-w-screen-2xl mx-auto px-6 sm:px-8 lg:px-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 sm:gap-16 mb-16">
           {/* Company Info */}
-          <div className="space-y-4">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center">
-                <Stethoscope className="w-5 h-5 text-white" />
+          <div className="space-y-6 text-center md:text-left">
+            <div className="flex items-center justify-center md:justify-start gap-3">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center shadow-lg shadow-orange-500/20">
+                <Stethoscope className="h-6 w-6 text-white" />
               </div>
-              <span className="text-xl font-bold">MediTrack+</span>
+              <span className="text-2xl font-bold tracking-tight">MediTrack<span className="text-orange-500">+</span></span>
             </div>
-            <p className="text-muted-foreground text-sm">
-              Revolutionizing healthcare management with cutting-edge technology and compassionate care.
+            <p className="text-slate-400 text-base leading-relaxed max-w-sm mx-auto md:mx-0">
+              Revolutionizing healthcare management with smart solutions for patients, doctors, and administrators.
             </p>
-            <div className="flex space-x-4">
-              <a href="#" className="text-muted-foreground hover:text-orange-400 transition-colors">
-                <Facebook className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-orange-400 transition-colors">
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-orange-400 transition-colors">
-                <Linkedin className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-orange-400 transition-colors">
-                <Instagram className="w-5 h-5" />
-              </a>
+            <div className="flex items-center justify-center md:justify-start gap-5 pt-2">
+              <a href="#" className="text-slate-400 hover:text-orange-500 transition-colors"><Facebook className="w-5 h-5" /></a>
+              <a href="#" className="text-slate-400 hover:text-orange-500 transition-colors"><Twitter className="w-5 h-5" /></a>
+              <a href="#" className="text-slate-400 hover:text-orange-500 transition-colors"><Linkedin className="w-5 h-5" /></a>
+              <a href="#" className="text-slate-400 hover:text-orange-500 transition-colors"><Instagram className="w-5 h-5" /></a>
+            </div>
+          </div>
+          
+          {/* Quick Links */}
+          <div className="grid grid-cols-2 gap-8 sm:col-span-1">
+            <div className="space-y-6">
+              <h4 className="text-lg font-bold text-white uppercase tracking-wider">Services</h4>
+              <ul className="space-y-3">
+                {['Patient Management', 'Doctor Portal', 'Scheduling', 'Records'].map((item) => (
+                  <li key={item}><a href="#" className="text-slate-400 hover:text-white transition-colors text-sm">{item}</a></li>
+                ))}
+              </ul>
+            </div>
+            <div className="space-y-6">
+              <h4 className="text-lg font-bold text-white uppercase tracking-wider">Company</h4>
+              <ul className="space-y-3">
+                {['About Us', 'Careers', 'Press', 'Blog'].map((item) => (
+                  <li key={item}><a href="#" className="text-slate-400 hover:text-white transition-colors text-sm">{item}</a></li>
+                ))}
+              </ul>
             </div>
           </div>
 
-          {/* Services */}
-          <div className="space-y-4">
-            <h3 className="font-semibold">Services</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link href="/services/patient-management" className="hover:text-orange-400 transition-colors">Patient Management</Link></li>
-              <li><Link href="/services/doctor-portal" className="hover:text-orange-400 transition-colors">Doctor Portal</Link></li>
-              <li><Link href="/services/appointment-scheduling" className="hover:text-orange-400 transition-colors">Appointment Scheduling</Link></li>
-              <li><Link href="/services/medical-records" className="hover:text-orange-400 transition-colors">Medical Records</Link></li>
-              <li><Link href="/services/prescription-management" className="hover:text-orange-400 transition-colors">Prescription Management</Link></li>
-              <li><Link href="/services/health-analytics" className="hover:text-orange-400 transition-colors">Health Analytics</Link></li>
+          {/* Contact & Support */}
+          <div className="space-y-6 text-center md:text-left sm:col-span-1">
+            <h4 className="text-lg font-bold text-white uppercase tracking-wider">Support</h4>
+            <ul className="space-y-4">
+              <li className="flex items-center justify-center md:justify-start gap-3 text-slate-400 text-sm">
+                <div className="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center shrink-0">
+                  <Activity className="w-4 h-4" />
+                </div>
+                <span>support@meditrack.com</span>
+              </li>
+              <li className="flex items-center justify-center md:justify-start gap-3 text-slate-400 text-sm">
+                <div className="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center shrink-0">
+                  <Shield className="w-4 h-4" />
+                </div>
+                <span>Privacy & Security</span>
+              </li>
             </ul>
           </div>
 
-          {/* Support */}
-          <div className="space-y-4">
-            <h3 className="font-semibold">Support</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link href="/support/help-center" className="hover:text-orange-400 transition-colors">Help Center</Link></li>
-              <li><Link href="/support/documentation" className="hover:text-orange-400 transition-colors">Documentation</Link></li>
-              <li><Link href="/support/api-reference" className="hover:text-orange-400 transition-colors">API Reference</Link></li>
-              <li><Link href="/support/contact-support" className="hover:text-orange-400 transition-colors">Contact Support</Link></li>
-              <li><Link href="/support/system-status" className="hover:text-orange-400 transition-colors">System Status</Link></li>
-              <li><Link href="/support/security" className="hover:text-orange-400 transition-colors">Security</Link></li>
-            </ul>
-          </div>
-
-          {/* Company */}
-          <div className="space-y-4">
-            <h3 className="font-semibold">Company</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link href="/company/about-us" className="hover:text-orange-400 transition-colors">About Us</Link></li>
-              <li><Link href="/company/careers" className="hover:text-orange-400 transition-colors">Careers</Link></li>
-              <li><Link href="/company/press" className="hover:text-orange-400 transition-colors">Press</Link></li>
-              <li><Link href="/company/blog" className="hover:text-orange-400 transition-colors">Blog</Link></li>
-              <li><Link href="/company/privacy-policy" className="hover:text-orange-400 transition-colors">Privacy Policy</Link></li>
-              <li><Link href="/company/terms-of-service" className="hover:text-orange-400 transition-colors">Terms of Service</Link></li>
-            </ul>
+          {/* Newsletter / Action */}
+          <div className="space-y-6 text-center md:text-left">
+            <h4 className="text-lg font-bold text-white uppercase tracking-wider">Newsletter</h4>
+            <p className="text-slate-400 text-sm">Stay updated with healthcare innovations.</p>
+            <div className="flex flex-col gap-3">
+              <input 
+                placeholder="Your email" 
+                className="bg-slate-800 border-slate-700 text-white placeholder:text-slate-500 h-11 px-4 rounded-xl focus:ring-2 focus:ring-orange-500 outline-none transition-all"
+              />
+              <Button style={{ background: `linear-gradient(135deg, ${colorValues.primary}, ${colorValues.primary}dd)` }} className="text-white h-11 rounded-xl font-bold font-semibold shadow-lg shadow-orange-500/20">
+                Subscribe
+              </Button>
+            </div>
           </div>
         </div>
-
-        <div className="border-t border-border mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-sm text-muted-foreground">
-            © 2026 Gaming Network Studio Media Group. All rights reserved.
-          </p>
-          <div className="flex items-center space-x-4 mt-4 md:mt-0">
+        
+        <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-6 text-slate-500 text-sm">
+          <p>© {new Date().getFullYear()} MediTrack+. All rights reserved.</p>
+          <div className="flex flex-wrap justify-center gap-6 sm:gap-8">
             <button
               onClick={() => setShowTeamModal(true)}
-              className="text-sm text-muted-foreground hover:text-orange-400 transition-colors"
+              className="hover:text-orange-400 transition-colors"
             >
               Made By Group-1
             </button>
-            <span className="text-muted-foreground">•</span>
-            <Link href="/company/privacy-policy" className="text-sm text-muted-foreground hover:text-orange-400 transition-colors">
-              Privacy
-            </Link>
-            <span className="text-muted-foreground">•</span>
-            <Link href="/company/terms-of-service" className="text-sm text-muted-foreground hover:text-orange-400 transition-colors">
-              Terms
-            </Link>
+            <a href="#" className="hover:text-white transition-colors">Privacy</a>
+            <a href="#" className="hover:text-white transition-colors">Terms</a>
           </div>
         </div>
       </div>

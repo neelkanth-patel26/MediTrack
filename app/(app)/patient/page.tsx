@@ -191,21 +191,21 @@ export default function PatientDashboard() {
               </p>
             )}
           </div>
-          <div className="flex gap-2">
-            <Link href="/patient/find-doctors">
-              <Button variant="outline" size="sm">
+          <div className="flex flex-wrap gap-2 sm:gap-3">
+            <Link href="/patient/find-doctors" className="flex-1 sm:flex-none">
+              <Button variant="outline" size="sm" className="w-full">
                 <Search className="h-4 w-4 mr-2" />
                 Find Doctors
               </Button>
             </Link>
             <ViewDetailsDialog title="Notifications & Announcements" data={{totalNotifications: 5, announcements: announcements.length, unread: 2, lastNotification: '2 hours ago', urgentAlerts: 1, recentAnnouncements: announcements.slice(0, 3).map(a => `${a.title} - ${a.priority}`).join(', ') || 'No announcements'}}>
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" className="flex-1 sm:flex-none">
                 <Bell className="h-4 w-4 mr-2" />
                 Notifications ({5 + announcements.length})
               </Button>
             </ViewDetailsDialog>
             <AddVitalDialog>
-              <Button style={{ backgroundColor: colorValues.primary }} className="text-white" size="sm">
+              <Button style={{ backgroundColor: colorValues.primary }} className="text-white flex-1 sm:flex-none" size="sm">
                 <Plus className="h-4 w-4 mr-2" />
                 Quick Log
               </Button>
@@ -255,10 +255,10 @@ export default function PatientDashboard() {
 
         {/* Active Prescriptions */}
         <Card className="p-4 sm:p-6">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
             <h2 className="text-lg sm:text-xl font-semibold text-foreground">Active Prescriptions</h2>
             <ViewDetailsDialog title="All Prescriptions" data={{totalPrescriptions: patientData.prescriptions.length, activePrescriptions: patientData.prescriptions.filter(p => p.status === 'active').length, refillsNeeded: 1, lastRefill: '1 week ago'}}>
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" className="w-full sm:w-auto h-9">
                 <Eye className="h-4 w-4 mr-2" />
                 View All
               </Button>
@@ -297,17 +297,17 @@ export default function PatientDashboard() {
 
         {/* Upcoming Appointments */}
         <Card className="p-4 sm:p-6">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
             <h3 className="text-lg font-semibold text-slate-900 dark:text-white">Upcoming Appointments</h3>
-            <div className="flex gap-2">
-              <Link href="/patient/appointments">
-                <Button variant="outline" size="sm">
+            <div className="flex flex-row flex-wrap gap-2 w-full sm:w-auto">
+              <Link href="/patient/appointments" className="flex-1 sm:flex-none">
+                <Button variant="outline" size="sm" className="w-full h-9">
                   <Eye className="h-4 w-4 mr-2" />
                   View All
                 </Button>
               </Link>
               <BookAppointmentDialog>
-                <Button variant="outline" size="sm">
+                <Button variant="outline" size="sm" className="flex-1 sm:flex-none h-9">
                   <Calendar className="h-4 w-4 mr-2" />
                   Book New
                 </Button>

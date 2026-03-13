@@ -38,12 +38,21 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="MediTrack+" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="theme-color" content="#0f172a" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta name="theme-color" content="#ffffff" id="theme-color-meta" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
         <script
           dangerouslySetInnerHTML={{
             __html: `
+              function updateThemeColor() {
+                const isDark = document.documentElement.classList.contains('dark');
+                const meta = document.getElementById('theme-color-meta');
+                if (meta) {
+                  meta.setAttribute('content', isDark ? '#0f172a' : '#ffffff');
+                }
+              }
+
               try {
                 const savedDarkMode = localStorage.getItem('meditrack_dark_mode');
                 if (savedDarkMode !== null) {
@@ -61,6 +70,17 @@ export default function RootLayout({
                     localStorage.setItem('meditrack_dark_mode', 'false');
                   }
                 }
+                updateThemeColor();
+                
+                // Observe class changes on html element
+                const observer = new MutationObserver((mutations) => {
+                  mutations.forEach((mutation) => {
+                    if (mutation.attributeName === 'class') {
+                      updateThemeColor();
+                    }
+                  });
+                });
+                observer.observe(document.documentElement, { attributes: true });
               } catch (e) {}
             `,
           }}

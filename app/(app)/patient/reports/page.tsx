@@ -14,10 +14,26 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Label } from '@/components/ui/label'
 import { toast } from 'sonner'
 
+interface Report {
+  id: string
+  test_name: string
+  report_type: string
+  test_date: string
+  lab_name: string
+  status: string
+  technician_name?: string
+  doctor_name?: string
+  test_results?: any
+  reference_ranges?: any
+  abnormal_flags?: string
+  report_url?: string
+  created_at: string
+}
+
 export default function ReportsPage() {
   const { user } = useAuth()
   const { getColorValues } = useTheme()
-  const [reports, setReports] = useState([])
+  const [reports, setReports] = useState<Report[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [viewMode, setViewMode] = useState('list')
   const [searchTerm, setSearchTerm] = useState('')
@@ -398,18 +414,18 @@ For medical inquiries, please consult your healthcare provider.
 
   return (
     <div className="space-y-6">
-      <Card className="p-6">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold text-foreground">Medical Reports</h1>
-            <p className="text-muted-foreground">View and download your lab results and medical reports</p>
+      <Card className="p-4 sm:p-6">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          <div className="space-y-1 text-center lg:text-left">
+            <h1 className="text-2xl sm:text-3xl font-bold text-foreground">Medical Reports</h1>
+            <p className="text-sm sm:text-base text-muted-foreground">View and download your lab results and medical reports</p>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center justify-center gap-2">
             <Dialog open={uploadDialog} onOpenChange={setUploadDialog}>
               <DialogTrigger asChild>
-                <Button style={{ backgroundColor: colorValues.primary }} className="text-white">
+                <Button style={{ backgroundColor: colorValues.primary }} className="text-white flex-1 sm:flex-none h-10">
                   <Upload className="h-4 w-4 mr-2" />
-                  Upload Report
+                  Upload
                 </Button>
               </DialogTrigger>
               <DialogContent className="sm:max-w-lg">
@@ -691,83 +707,87 @@ For medical inquiries, please consult your healthcare provider.
                   </div>
                 </div>
               ) : (
-                <div className="flex justify-between items-start">
-                  <div className="flex items-start gap-4 flex-1">
-                    <div className="p-3 rounded-lg" style={{ backgroundColor: `${colorValues.primary}15` }}>
+                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6">
+                  <div className="flex flex-col xs:flex-row items-center xs:items-start gap-4 flex-1">
+                    <div className="p-3 rounded-xl shrink-0" style={{ backgroundColor: `${colorValues.primary}15` }}>
                       <FileText className="h-6 w-6" style={{ color: colorValues.primary }} />
                     </div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <h3 className="text-xl font-semibold text-foreground">{report.test_name}</h3>
-                        <Badge className={`${getStatusColor(report.status)} border flex items-center gap-1 px-2 py-1`}>
+                    <div className="flex-1 text-center xs:text-left min-w-0">
+                      <div className="flex flex-col xs:flex-row xs:items-center gap-2 mb-3">
+                        <h3 className="text-lg sm:text-xl font-bold text-foreground truncate">{report.test_name}</h3>
+                        <Badge className={`${getStatusColor(report.status)} border flex items-center justify-center gap-1 px-2 py-0.5 text-[10px] w-fit mx-auto xs:mx-0`}>
                           {getStatusIcon(report.status)}
                           {report.status}
                         </Badge>
                       </div>
-                      <p className="text-lg text-muted-foreground mb-3">{report.report_type}</p>
+                      <p className="text-base text-muted-foreground font-medium mb-4">{report.report_type}</p>
                       
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm mb-4">
-                        <div className="flex items-center gap-2 text-muted-foreground">
-                          <Calendar className="h-4 w-4" style={{ color: colorValues.primary }} />
-                          <span>{new Date(report.test_date).toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' })}</span>
+                      <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-y-3 gap-x-6 text-sm mb-4">
+                        <div className="flex items-center justify-center xs:justify-start gap-2 text-muted-foreground whitespace-nowrap">
+                          <Calendar className="h-4 w-4 shrink-0" style={{ color: colorValues.primary }} />
+                          <span>{new Date(report.test_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
                         </div>
-                        <div className="flex items-center gap-2 text-muted-foreground">
-                          <Building className="h-4 w-4" style={{ color: colorValues.primary }} />
-                          <span>{report.lab_name}</span>
+                        <div className="flex items-center justify-center xs:justify-start gap-2 text-muted-foreground min-w-0">
+                          <Building className="h-4 w-4 shrink-0" style={{ color: colorValues.primary }} />
+                          <span className="truncate">{report.lab_name}</span>
                         </div>
                         {report.doctor_name && (
-                          <div className="flex items-center gap-2 text-muted-foreground">
-                            <User className="h-4 w-4" style={{ color: colorValues.primary }} />
-                            <span>Dr. {report.doctor_name}</span>
+                          <div className="flex items-center justify-center xs:justify-start gap-2 text-muted-foreground min-w-0">
+                            <User className="h-4 w-4 shrink-0" style={{ color: colorValues.primary }} />
+                            <span className="truncate">Dr. {report.doctor_name}</span>
                           </div>
                         )}
                       </div>
                       
                       {report.technician_name && (
-                        <p className="text-sm text-muted-foreground mb-2">
-                          Technician: {report.technician_name}
+                        <p className="text-xs text-muted-foreground mb-3 flex items-center justify-center xs:justify-start gap-1">
+                          <span className="font-semibold">Technician:</span> {report.technician_name}
                         </p>
                       )}
                       
-                      {report.abnormal_flags && (
-                        <div className="p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg mb-3">
-                          <div className="flex items-center gap-2 text-red-700 dark:text-red-300">
-                            <AlertTriangle className="h-4 w-4" />
-                            <span className="font-medium text-sm">Abnormal Results</span>
-                          </div>
-                          <p className="text-sm text-red-600 dark:text-red-400 mt-1">{report.abnormal_flags}</p>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                  
-                  <div className="flex flex-col gap-2 ml-4">
-                    <ViewReportDialog report={report} />
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="outline" size="sm">
-                          <Download className="h-4 w-4 mr-2" />
-                          Download
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
-                        {report.report_url && (
-                          <DropdownMenuItem onClick={() => downloadOriginalFile(report)}>
-                            <FileText className="h-4 w-4 mr-2" />
-                            Original File
-                          </DropdownMenuItem>
-                        )}
-                        <DropdownMenuItem onClick={() => downloadTextReport(report)}>
-                          <Download className="h-4 w-4 mr-2" />
-                          Text Summary
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </div>
+            {report.abnormal_flags && (
+              <div className="p-3 bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-900/50 rounded-xl mb-3 inline-block w-full">
+                <div className="flex items-center justify-center xs:justify-start gap-2 text-red-700 dark:text-red-300 mb-1">
+                  <AlertTriangle className="h-4 w-4 shrink-0" />
+                  <span className="font-bold text-xs uppercase tracking-wider">Abnormal Results</span>
                 </div>
-              )}
-            </Card>
-          ))
+                <p className="text-xs text-red-600 dark:text-red-400 text-center xs:text-left">{report.abnormal_flags}</p>
+              </div>
+            )}
+          </div>
+        </div>
+        
+        <div className="flex flex-row sm:flex-col gap-2 pt-4 sm:pt-0 border-t sm:border-t-0 border-border">
+          <div className="flex-1 sm:flex-none">
+            <ViewReportDialog report={report} />
+          </div>
+          <div className="flex-1 sm:flex-none">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" size="sm" className="w-full h-9 text-xs">
+                  <Download className="h-4 w-4 mr-2" />
+                  Download
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                {report.report_url && (
+                  <DropdownMenuItem onClick={() => downloadOriginalFile(report)}>
+                    <FileText className="h-4 w-4 mr-2" />
+                    Original File
+                  </DropdownMenuItem>
+                )}
+                <DropdownMenuItem onClick={() => downloadTextReport(report)}>
+                  <Download className="h-4 w-4 mr-2" />
+                  Text Summary
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+        </div>
+      </div>
+    )}
+  </Card>
+))
         )}
       </div>
     </div>
