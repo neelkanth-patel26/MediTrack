@@ -1,0 +1,3505 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MediTrack+ | AI-Powered Healthcare Management Platform</title>
+    <meta name="description" content="Transform your healthcare practice with MediTrack+'s AI-powered diagnostics, patient management, and analytics. Join 50K+ healthcare professionals. Start free trial today.">
+    <meta name="keywords" content="healthcare management, AI diagnostics, EHR, patient management, medical software, telemedicine">
+    <meta name="author" content="MediTrack+">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="MediTrack+ | AI-Powered Healthcare Management Platform">
+    <meta property="og:description" content="Transform your healthcare practice with AI-powered diagnostics and patient management.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MediTrack+ | AI-Powered Healthcare Management Platform">
+    <meta name="twitter:description" content="Transform your healthcare practice with AI-powered diagnostics and patient management.">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      /* Hide the scroll bar */
+      ::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+      }
+
+      /* Hide the scroll bar track */
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      /* Hide the scroll bar thumb */
+      ::-webkit-scrollbar-thumb {
+        background: transparent;
+      }
+
+      :root {
+        /* Light theme colors matching dashboard */
+        --bg-primary: #ffffff;
+        --bg-secondary: #ea580c;
+        --text-primary: #0f0f0f;
+        --text-secondary: #6b7280;
+        --accent-color: #ea580c;
+        --header-bg: rgba(255, 255, 255, 0.9);
+        --footer-bg: rgba(255, 255, 255, 0.9);
+        --card-bg: rgba(255, 255, 255, 0.95);
+        --border-color: rgba(234, 88, 12, 0.2);
+
+        /* Existing variables updated to match dashboard */
+        --primary-orange: #ea580c;
+        --secondary-orange: #ea580c;
+        --dark-bg: #0f0f0f;
+        --card-dark: #1a1a1a;
+        --text-light: #f5f5f5;
+        --shadow-card: 0 20px 40px rgba(0, 0, 0, 0.1);
+        --shadow-hover: 0 30px 60px rgba(0, 0, 0, 0.15);
+        --accent-blue: #3b82f6;
+        --success-green: #16a34a;
+        --gradient-primary: linear-gradient(135deg, #ea580c 0%, #ea580c 100%);
+        --gradient-dark: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+        --shadow-glow: 0 0 30px rgba(234, 88, 12, 0.3);
+        /* --shadow-card: 0 10px 40px rgba(0, 0, 0, 0.3); */ /* Redundant, using the one above */
+        /* Added background gradient variables for theme switching */
+        --bg-gradient: linear-gradient(135deg, #ffffff 0%, #f8fafc 15%, #f1f5f9 30%, #f8fafc 45%, #ffffff 60%, #f8fafc 75%, #f1f5f9 90%, #ffffff 100%);
+      }
+
+      /* Enhanced automatic theme switching with proper background colors */
+      @media (prefers-color-scheme: light) {
+        :root {
+          --primary-orange: #ea580c;
+          --secondary-orange: #ea580c;
+          /* Changed background color from #faead0 to #fafafa */
+          --dark-bg: #ffffff;
+          --card-bg: #ffffff; /* This is now overridden by the new --card-bg variable */
+          --text-primary: #0f0f0f; /* This is now overridden by the new --text-primary variable */
+          --text-secondary: #6b7280; /* This is now overridden by the new --text-secondary variable */
+          --accent-blue: #ea580c;
+          --success-green: #ea580c;
+          --gradient-primary: linear-gradient(135deg, #ea580c 0%, #ea580c 100%);
+            /* Updated gradient to use #fafafa instead of #faead0 */
+          --gradient-dark: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+          --shadow-glow: 0 0 30px rgba(234, 88, 12, 0.3);
+          /* --shadow-card: 0 10px 40px rgba(0, 0, 0, 0.1); */ /* Redundant, using the one above */
+          /* Light theme background gradient updated to use #fafafa */
+          --bg-gradient: linear-gradient(135deg, #ffffff 0%, #f8fafc 15%, #f1f5f9 30%, #f8fafc 45%, #ffffff 60%, #f8fafc 75%, #f1f5f9 90%, #ffffff 100%);
+        }
+        /* Dark mode hero h1 gradient for white text */
+        @media (prefers-color-scheme: dark) {
+          .hero h1 {
+            background: linear-gradient(135deg, #fff 0%, #e0e0e0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+          }
+        }
+@media (prefers-color-scheme: dark) {
+  :root {
+--primary-orange: #ea580c;
+        --secondary-orange: #ea580c;
+        --dark-bg: #0f0f0f;
+        --card-bg: #1a1a1a;
+        --text-primary: #f5f5f5;
+        --text-secondary: #a0a0a0;
+        --accent-blue: #3b82f6;
+        --success-green: #16a34a;
+        --gradient-primary: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+        --gradient-dark: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+        --shadow-glow: 0 0 30px rgba(255, 107, 53, 0.3);
+        --shadow-card: 0 10px 40px rgba(0, 0, 0, 0.3);
+  }
+}
+
+      }
+
+      /* Dark theme overrides for header, footer, and floating components */
+      
+
+      /* Dark theme overrides for header, footer, and floating components */
+      
+
+      body {
+        font-family: "Inter", sans-serif;
+        /* Updated to use CSS variable for background gradient */
+        background: var(--bg-gradient);
+        background-size: 400% 400%;
+        animation: gradientMove 15s ease infinite;
+        background-attachment: fixed;
+        color: var(--text-primary);
+        line-height: 1.6;
+        overflow-x: hidden;
+        min-height: 100vh;
+        /* Removed all margins and padding */
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Added keyframe animation for moving gradient */
+      @keyframes gradientMove {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      /* Enhanced overlay animation for smooth gradient flow */
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+            circle at 20% 10%,
+            rgba(255, 107, 53, 0.08) 0%,
+            transparent 40%
+          ),
+          radial-gradient(
+            circle at 80% 30%,
+            rgba(0, 212, 255, 0.06) 0%,
+            transparent 40%
+          ),
+          radial-gradient(
+            circle at 40% 70%,
+            rgba(255, 107, 53, 0.05) 0%,
+            transparent 40%
+          ),
+          radial-gradient(
+            circle at 90% 90%,
+            rgba(0, 212, 255, 0.04) 0%,
+            transparent 40%
+          ),
+          radial-gradient(
+            circle at 60% 20%,
+            rgba(0, 255, 136, 0.03) 0%,
+            transparent 35%
+          );
+        z-index: -1;
+        pointer-events: none;
+        animation: overlayMove 20s ease-in-out infinite;
+      }
+
+      /* Floating particles animation */
+      body::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image:
+          radial-gradient(circle at 25% 25%, rgba(255, 107, 53, 0.1) 2px, transparent 2px),
+          radial-gradient(circle at 75% 75%, rgba(0, 212, 255, 0.08) 1px, transparent 1px),
+          radial-gradient(circle at 50% 50%, rgba(0, 255, 136, 0.06) 1.5px, transparent 1.5px),
+          radial-gradient(circle at 10% 80%, rgba(255, 107, 53, 0.05) 1px, transparent 1px),
+          radial-gradient(circle at 90% 20%, rgba(0, 212, 255, 0.04) 1px, transparent 1px);
+        background-size: 100px 100px, 150px 150px, 200px 200px, 120px 120px, 180px 180px;
+        z-index: -1;
+        pointer-events: none;
+        animation: particlesFloat 30s linear infinite;
+      }
+
+      /* Updated overlay colors to work with both themes */
+      @media (prefers-color-scheme: light) {
+        body::before {
+          background: radial-gradient(
+              circle at 20% 10%,
+              rgba(234, 88, 12, 0.08) 0%,
+              transparent 40%
+            ),
+            radial-gradient(
+              circle at 80% 30%,
+              rgba(234, 88, 12, 0.06) 0%,
+              transparent 40%
+            ),
+            radial-gradient(
+              circle at 40% 70%,
+              rgba(234, 88, 12, 0.05) 0%,
+              transparent 40%
+            ),
+            radial-gradient(
+              circle at 90% 90%,
+              rgba(234, 88, 12, 0.04) 0%,
+              transparent 40%
+            );
+        }
+      }
+
+      /* Dark theme overlay adjustments */
+      
+
+      @keyframes overlayMove {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1) rotate(0deg);
+        }
+        25% {
+          opacity: 0.8;
+          transform: scale(1.1) rotate(1deg);
+        }
+        50% {
+          opacity: 0.9;
+          transform: scale(1.05) rotate(-0.5deg);
+        }
+        75% {
+          opacity: 0.7;
+          transform: scale(1.08) rotate(0.8deg);
+        }
+      }
+
+      /* Floating particles animation */
+      @keyframes particlesFloat {
+        0% {
+          background-position: 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
+        }
+        100% {
+          background-position: 100px 100px, 150px 150px, 200px 200px, 120px 120px, 180px 180px;
+        }
+      }
+
+      /* Reset all default margins and padding */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* Enhanced floating header with better animations */
+      .header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        z-index: 1000;
+        padding: 1rem 0;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        transform: translateY(0);
+      }
+
+      .header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+        z-index: -1;
+      }
+
+      .header.hidden {
+        transform: translateY(-100%);
+      }
+
+      .header.scrolled {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        .header {
+          background: rgba(10, 10, 10, 0.1);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header::before {
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+        }
+
+        .header.scrolled {
+          background: rgba(10, 10, 10, 0.95);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+      }
+
+      .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        font-family: "Poppins", sans-serif;
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: var(--text-primary);
+        text-decoration: none;
+      }
+
+      .logo i {
+        color: var(--primary-orange);
+        margin-right: 0.5rem;
+        font-size: 2rem;
+        animation: pulse 1s infinite;
+      }
+
+      .nav-menu {
+        display: flex;
+        list-style: none;
+        gap: 2.5rem;
+      }
+
+      .nav-menu a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .nav-menu a::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--gradient-primary);
+        transition: width 0.3s ease;
+      }
+
+      .nav-menu a:hover {
+        color: var(--text-primary);
+      }
+
+      .nav-menu a:hover::after {
+        width: 100%;
+      }
+
+      .nav-buttons {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .btn {
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: left 0.5s;
+      }
+
+      .btn:hover::before {
+        left: 100%;
+      }
+
+      .btn-primary {
+        background: var(--gradient-primary);
+        color: white;
+        box-shadow: var(--shadow-glow);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0 40px rgba(255, 107, 53, 0.5);
+      }
+
+      .btn-secondary {
+        background: transparent;
+        color: var(--text-primary);
+        border: 2px solid var(--primary-orange);
+      }
+
+      .btn-secondary:hover {
+        background: var(--primary-orange);
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      /* Enhanced hero section with better animations and layout */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        padding: 8rem 2rem 4rem;
+        background: transparent;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          ellipse at center,
+          rgba(255, 107, 53, 0.05) 0%,
+          transparent 70%
+        );
+        transform: translate(-50%, -50%);
+        animation: heroGlow 8s ease-in-out infinite alternate;
+        z-index: 0;
+      }
+
+      @keyframes heroGlow {
+        0% {
+          opacity: 0.3;
+          transform: translate(-50%, -50%) scale(1);
+        }
+        100% {
+          opacity: 0.8;
+          transform: translate(-50%, -50%) scale(1.2);
+        }
+      }
+
+      .hero-content {
+        text-align: center;
+        max-width: 900px;
+        position: relative;
+        z-index: 2;
+        animation: heroSlideIn 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+
+      @keyframes heroSlideIn {
+        0% {
+          opacity: 0;
+          transform: translateY(50px) scale(0.9);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .hero-badge {
+        background: rgba(255, 107, 53, 0.1);
+        border: 1px solid rgba(255, 107, 53, 0.3);
+        color: var(--primary-orange);
+        padding: 0.5rem 1.5rem;
+        border-radius: 50px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 2rem;
+        display: inline-block;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+
+      .hero h1 {
+        font-family: "Poppins", sans-serif;
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 900;
+        margin-bottom: 1.5rem;
+        line-height: 1.1;
+        background: linear-gradient(135deg, #fff 0%, #e0e0e0 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: textGlow 3s ease-in-out infinite alternate;
+      }
+
+      @keyframes textGlow {
+        0% {
+          filter: drop-shadow(0 0 10px rgba(255, 107, 53, 0.3));
+        }
+        100% {
+          filter: drop-shadow(0 0 20px rgba(255, 107, 53, 0.6));
+        }
+      }
+
+      .hero p {
+        font-size: 1.25rem;
+        color: var(--text-secondary);
+        margin-bottom: 3rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.6;
+        animation: fadeInUp 1s ease-out 0.3s both;
+      }
+
+      /* How It Works section */
+      .how-it-works {
+        padding: 8rem 2rem;
+        background: transparent;
+        position: relative;
+      }
+
+      .how-it-works::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(234, 88, 12, 0.3), transparent);
+      }
+
+      .steps-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 3rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .step-card {
+        background: var(--card-bg);
+        backdrop-filter: blur(20px);
+        padding: 3rem 2rem;
+        border-radius: 25px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: center;
+        position: relative;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        animation: stepSlideUp 0.8s ease-out both;
+      }
+
+      .step-card:nth-child(1) { animation-delay: 0.1s; }
+      .step-card:nth-child(2) { animation-delay: 0.2s; }
+      .step-card:nth-child(3) { animation-delay: 0.3s; }
+      .step-card:nth-child(4) { animation-delay: 0.4s; }
+
+      @keyframes stepSlideUp {
+        0% {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .step-number {
+        width: 60px;
+        height: 60px;
+        background: var(--gradient-primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: white;
+        margin: 0 auto 1.5rem;
+        box-shadow: 0 8px 25px rgba(234, 88, 12, 0.3);
+      }
+
+      .step-title {
+        font-family: "Poppins", sans-serif;
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+      }
+
+      .step-description {
+        color: var(--text-secondary);
+        line-height: 1.6;
+        font-size: 0.95rem;
+      }
+
+      .step-arrow {
+        position: absolute;
+        top: 50%;
+        right: -2rem;
+        transform: translateY(-50%);
+        font-size: 2rem;
+        color: var(--primary-orange);
+        opacity: 0.6;
+      }
+
+      @media (max-width: 768px) {
+        .step-arrow {
+          display: none;
+        }
+      }
+      /* THEME OVERRIDES */
+      @media (prefers-color-scheme: light) {
+        .hero h1 {
+          background: linear-gradient(135deg, #333333 0%, #666666 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+        .header {
+          background: #fff !important;
+          border-bottom: 1px solid #eee !important;
+        }
+        .footer {
+          background: #fff !important;
+          color: #222 !important;
+          border-top: 1px solid #eee !important;
+        }
+        .floating-stats {
+          background: #fff !important;
+          color: #222 !important;
+          border: 1px solid #eee !important;
+          box-shadow: 0 8px 32px rgba(0,0,0,0.12) !important;
+        }
+        .testimonial-card {
+          background: #fff !important;
+          color: #222 !important;
+          border: 1px solid #eee !important;
+          box-shadow: 0 8px 32px rgba(0,0,0,0.10) !important;
+        }
+        /* THEME OVERRIDES for .service-title and .stat-number */
+        .service-title {
+          color: #222 !important;
+        }
+        .stat-number {
+          color: #222 !important;
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        .hero h1 {
+          background: linear-gradient(135deg, #fff 0%, #e0e0e0 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+        .header {
+          background: rgba(10, 10, 10, 0.8) !important;
+          border-bottom: 1px solid rgba(255, 107, 53, 0.2) !important;
+        }
+        .footer {
+          background: #181818 !important;
+          color: #fff !important;
+          border-top: 1px solid rgba(255, 107, 53, 0.1) !important;
+        }
+        .floating-stats {
+          background: #181818 !important;
+          color: #fff !important;
+          border: 1px solid rgba(255, 107, 53, 0.1) !important;
+          box-shadow: 0 8px 32px rgba(255,107,53,0.08) !important;
+        }
+        .testimonial-card {
+          background: #181818 !important;
+          color: #fff !important;
+          border: 1px solid rgba(255, 107, 53, 0.1) !important;
+          box-shadow: 0 8px 32px rgba(255,107,53,0.08) !important;
+        }
+        /* THEME OVERRIDES for .service-title and .stat-number */
+        .service-title {
+          color: #fff !important;
+        }
+        .stat-number {
+          color: #fff !important;
+        }
+      }
+
+      /* Added media query for dark mode hero title gradient */
+      
+
+      .hero .highlight {
+        color: var(--primary-orange);
+      }
+
+      .hero p {
+        font-size: 1.3rem;
+        color: var(--text-secondary);
+        margin-bottom: 3rem;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.7;
+      }
+
+      /* THEME OVERRIDE for inline style hero subtitle paragraph */
+@media (prefers-color-scheme: dark) {
+  p[style*="color: var(--text-secondary)"] {
+    color: #fff !important;
+  }
+  .comparison-table td:first-child {
+    color: #fff !important;
+    background: #181818 !important;
+  }
+  .service-description {
+    color: #fff !important;
+  }
+}
+@media (prefers-color-scheme: light) {
+  p[style*="color: var(--text-secondary)"] {
+    color: #222 !important;
+  }
+  .comparison-table td:first-child {
+    color: #222 !important;
+    background: #fff !important;
+  }
+  .service-description {
+    color: #222 !important;
+  }
+}
+
+      .hero-buttons {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        animation: fadeInUp 1s ease-out 0.6s both;
+      }
+
+      .cta-button {
+        background: var(--gradient-primary);
+        color: white;
+        padding: 1.2rem 2.5rem;
+        font-size: 1.1rem;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        box-shadow: var(--shadow-glow);
+        position: relative;
+        overflow: hidden;
+        animation: buttonBounce 0.8s ease-out 0.8s both;
+      }
+
+      @keyframes buttonBounce {
+        0% {
+          opacity: 0;
+          transform: translateY(20px) scale(0.9);
+        }
+        50% {
+          opacity: 1;
+          transform: translateY(-5px) scale(1.05);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .cta-button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.4),
+          transparent
+        );
+        transition: left 0.6s;
+      }
+
+      .cta-button:hover::before {
+        left: 100%;
+      }
+
+      .cta-button:hover {
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 20px 60px rgba(255, 107, 53, 0.5);
+      }
+
+      .demo-button {
+        background: transparent;
+        color: var(--text-primary);
+        padding: 1.2rem 2.5rem;
+        font-size: 1.1rem;
+        border: 2px solid var(--primary-orange);
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        position: relative;
+        overflow: hidden;
+        animation: buttonBounce 0.8s ease-out 1s both;
+      }
+
+      .demo-button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--primary-orange);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.4s ease;
+        z-index: -1;
+      }
+
+      .demo-button:hover::before {
+        transform: scaleX(1);
+      }
+
+      .demo-button:hover {
+        color: white;
+        transform: translateY(-3px) scale(1.05);
+        border-color: var(--primary-orange);
+        box-shadow: 0 15px 40px rgba(237, 117, 80, 0.3);
+      }
+      }
+
+      .demo-button:hover {
+        border-color: var(--primary-orange);
+        color: var(--primary-orange);
+        transform: translateY(-3px);
+      }
+
+      /* THEME OVERRIDES for .demo-button */
+@media (prefers-color-scheme: light) {
+  .demo-button {
+    color: #222 !important;
+    border: 2px solid #ED7550 !important;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .demo-button {
+    color: #fff !important;
+    border: 2px solid #ED7550 !important;
+  }
+}
+
+      /* Enhanced floating elements with better positioning */
+      .floating-stats {
+        position: absolute;
+        background: var(--card-bg);
+        backdrop-filter: blur(20px);
+        padding: 1.5rem;
+        border-radius: 20px;
+        border: 1px solid var(--border-color);
+        box-shadow: var(--shadow-card);
+        animation: float 6s ease-in-out infinite, fadeInScale 1s ease-out;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+      }
+
+      .floating-stats:hover {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
+        border-color: rgba(255, 107, 53, 0.3);
+      }
+
+      .floating-stats:nth-child(1) {
+        top: 20%;
+        left: 5%;
+        animation-delay: 0s, 0.5s;
+      }
+
+      .floating-stats:nth-child(2) {
+        top: 20%;
+        right: 5%;
+        animation-delay: 2s, 0.7s;
+      }
+
+      .floating-stats:nth-child(3) {
+        bottom: 20%;
+        left: 8%;
+        animation-delay: 4s, 0.9s;
+      }
+
+      @keyframes fadeInScale {
+        0% {
+          opacity: 0;
+          transform: scale(0.8);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      .stat-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .stat-icon {
+        font-size: 1.5rem;
+        color: var(--primary-orange);
+      }
+
+      .stat-text {
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+
+      /* Enhanced stats section with floating cards */
+      .stats {
+        padding: 6rem 2rem;
+        /* Made stats section transparent with white overlay for smooth flow */
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(10px);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .stat-card {
+        /* Enhanced white styling with transparency */
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        padding: 2.5rem 2rem;
+        border-radius: 20px;
+        text-align: center;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .stat-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.1) 0%,
+          transparent 100%
+        );
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .stat-card:hover::before {
+        opacity: 1;
+      }
+
+      .stat-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 60px rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 107, 53, 0.3);
+      }
+
+      .stat-number {
+        display: block;
+        font-size: 3rem;
+        font-weight: 800;
+        color: var(--text-primary);
+        margin-bottom: 0.75rem;
+        text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      }
+
+      .stat-label {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-secondary);
+      }
+
+      /* Features section */
+      .features {
+        padding: 8rem 2rem;
+        background: transparent;
+        position: relative;
+      }
+
+      .features::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(234, 88, 12, 0.3), transparent);
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2.5rem;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .feature-card {
+        background: var(--card-bg);
+        backdrop-filter: blur(20px);
+        padding: 2.5rem;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+        animation: featureSlideUp 0.8s ease-out both;
+      }
+
+      .feature-card:nth-child(1) { animation-delay: 0.1s; }
+      .feature-card:nth-child(2) { animation-delay: 0.2s; }
+      .feature-card:nth-child(3) { animation-delay: 0.3s; }
+      .feature-card:nth-child(4) { animation-delay: 0.4s; }
+      .feature-card:nth-child(5) { animation-delay: 0.5s; }
+      .feature-card:nth-child(6) { animation-delay: 0.6s; }
+
+      @keyframes featureSlideUp {
+        0% {
+          opacity: 0;
+          transform: translateY(50px) scale(0.9);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .feature-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--primary-orange), var(--accent-blue));
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.4s ease;
+      }
+
+      .feature-card:hover::before {
+        transform: scaleX(1);
+      }
+
+      .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 25px 50px rgba(234, 88, 12, 0.15);
+        border-color: rgba(234, 88, 12, 0.3);
+      }
+
+      .feature-icon {
+        font-size: 3rem;
+        color: var(--primary-orange);
+        margin-bottom: 1.5rem;
+        position: relative;
+        z-index: 2;
+        transition: all 0.3s ease;
+      }
+
+      .feature-card:hover .feature-icon {
+        transform: scale(1.1);
+        color: var(--accent-blue);
+      }
+
+      .feature-title {
+        font-family: "Poppins", sans-serif;
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        position: relative;
+        z-index: 2;
+        color: var(--text-primary);
+      }
+
+      .feature-description {
+        color: var(--text-secondary);
+        line-height: 1.6;
+        font-size: 0.95rem;
+        position: relative;
+        z-index: 2;
+      }
+
+      /* FAQ section */
+      .faq {
+        padding: 8rem 2rem;
+        background: transparent;
+        position: relative;
+      }
+
+      .faq::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(234, 88, 12, 0.3), transparent);
+      }
+
+      .faq-container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .faq-item {
+        background: var(--card-bg);
+        backdrop-filter: blur(20px);
+        border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        margin-bottom: 1rem;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .faq-item:hover {
+        box-shadow: 0 10px 30px rgba(234, 88, 12, 0.1);
+        border-color: rgba(234, 88, 12, 0.2);
+      }
+
+      .faq-question {
+        padding: 1.5rem 2rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: none;
+        border: none;
+        width: 100%;
+        text-align: left;
+        transition: all 0.3s ease;
+      }
+
+      .faq-question:hover {
+        background: rgba(234, 88, 12, 0.05);
+      }
+
+      .faq-question h3 {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        font-family: "Poppins", sans-serif;
+      }
+
+      .faq-toggle {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--primary-orange);
+        transition: transform 0.3s ease;
+      }
+
+      .faq-item.active .faq-toggle {
+        transform: rotate(45deg);
+      }
+
+      .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease, padding 0.4s ease;
+        padding: 0 2rem;
+        background: rgba(234, 88, 12, 0.02);
+      }
+
+      .faq-item.active .faq-answer {
+        max-height: 200px;
+        padding: 1rem 2rem 2rem;
+      }
+
+      .faq-answer p {
+        margin: 0;
+        color: var(--text-secondary);
+        line-height: 1.6;
+        font-size: 0.95rem;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 5rem;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        animation: fadeInUp 1s ease-out;
+      }
+
+      .section-badge {
+        background: rgba(0, 212, 255, 0.1);
+        border: 1px solid rgba(0, 212, 255, 0.3);
+        color: var(--accent-blue);
+        padding: 0.5rem 1.5rem;
+        border-radius: 50px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        display: inline-block;
+        animation: badgeFloat 3s ease-in-out infinite;
+      }
+
+      @keyframes badgeFloat {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-5px); }
+      }
+
+      .section-title {
+        font-family: "Poppins", sans-serif;
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        line-height: 1.2;
+        color: var(--text-primary);
+        animation: titleSlideIn 1s ease-out 0.2s both;
+      }
+
+      @keyframes titleSlideIn {
+        0% {
+          opacity: 0;
+          transform: translateX(-30px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .section-subtitle {
+        color: var(--text-secondary);
+        font-size: 1.2rem;
+        line-height: 1.7;
+        animation: fadeInUp 1s ease-out 0.4s both;
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2.5rem;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .service-card {
+        background: var(--card-bg);
+        backdrop-filter: blur(20px);
+        padding: 3rem;
+        border-radius: 25px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        animation: cardSlideUp 0.8s ease-out both;
+      }
+
+      .service-card:nth-child(1) { animation-delay: 0.1s; }
+      .service-card:nth-child(2) { animation-delay: 0.2s; }
+      .service-card:nth-child(3) { animation-delay: 0.3s; }
+      .service-card:nth-child(4) { animation-delay: 0.4s; }
+
+      @keyframes cardSlideUp {
+        0% {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .service-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--primary-orange), var(--accent-blue));
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.4s ease;
+      }
+
+      .service-card:hover::before {
+        transform: scaleX(1);
+      }
+
+      .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 25px 50px rgba(255, 107, 53, 0.15);
+        border-color: rgba(255, 107, 53, 0.3);
+      }
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 107, 53, 0.05) 0%,
+          rgba(0, 212, 255, 0.05) 100%
+        );
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .service-card:hover::before {
+        opacity: 1;
+      }
+
+      .service-card:hover {
+        transform: translateY(-15px);
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+        border-color: rgba(255, 107, 53, 0.3);
+      }
+
+      .service-icon {
+        font-size: 3rem;
+        color: var(--primary-orange);
+        margin-bottom: 2rem;
+        position: relative;
+        z-index: 2;
+      }
+
+      .service-title {
+        font-family: "Poppins", sans-serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        position: relative;
+        z-index: 2;
+      }
+
+      .service-description {
+        color: var(--text-secondary);
+        line-height: 1.7;
+        font-size: 1rem;
+        position: relative;
+        z-index: 2;
+      }
+
+      /* Competitive Advantage section */
+      .competitive-advantage {
+        padding: 8rem 2rem;
+        /* Enhanced white styling with transparency for smooth flow */
+        background: rgba(255, 255, 255, 0.02);
+        backdrop-filter: blur(10px);
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .comparison-table {
+        max-width: 1000px;
+        margin: 0 auto;
+        /* Enhanced table with white transparency */
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(15px);
+        border-radius: 20px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+
+      .comparison-table table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .comparison-table th {
+        /* Enhanced header with white transparency */
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--text-primary);
+        padding: 1.5rem;
+        font-weight: 700;
+        font-size: 1.1rem;
+        border-bottom: 2px solid rgba(255, 107, 53, 0.3);
+      }
+
+      .comparison-table td {
+        padding: 1.2rem 1.5rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        transition: all 0.3s ease;
+        /* Center align all table cell content */
+        text-align: center;
+        vertical-align: middle;
+      }
+
+      .comparison-table td:first-child {
+        /* Left align feature names for better readability */
+        text-align: left;
+        font-weight: 600;
+      }
+
+      .comparison-table tr:hover td {
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      .comparison-table i {
+        font-size: 1.2rem;
+      }
+
+      .check-icon {
+        color: var(--success-green);
+      }
+
+      .cross-icon {
+        color: var(--primary-orange);
+      }
+
+      /* Add better styling for limited/partial text */
+      .limited-text {
+        color: #fbbf24;
+        font-weight: 500;
+        font-size: 0.9rem;
+      }
+
+      .meditrack-column {
+        background: rgba(0, 255, 136, 0.1);
+        margin: 0.5rem;
+        padding: 0.5rem;
+      }
+
+      /* Testimonials section */
+      .testimonials {
+        padding: 8rem 2rem;
+        /* Made testimonials transparent to blend with gradient */
+        background: transparent;
+      }
+
+      .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+        max-width: 1400px;
+        margin: 3rem auto 0;
+      }
+
+      .testimonial-card {
+        background: var(--card-bg);
+        padding: 3rem;
+        border-radius: 25px;
+        border: 1px solid rgba(255, 107, 53, 0.1);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .testimonial-card::before {
+        content: '"';
+        position: absolute;
+        top: 1rem;
+        left: 2rem;
+        font-size: 4rem;
+        color: var(--primary-orange);
+        opacity: 0.3;
+        font-family: serif;
+      }
+
+      .testimonial-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-card);
+      }
+
+      .testimonial-text {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin-bottom: 2rem;
+        color: var(--text-secondary);
+        font-style: italic;
+      }
+
+      .testimonial-author {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .author-avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: var(--gradient-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 1.2rem;
+        color: white;
+      }
+
+      .author-info h4 {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--text-primary);
+      }
+
+      .author-info p {
+        margin: 0.25rem 0 0;
+        font-size: 0.9rem;
+        color: var(--primary-orange);
+      }
+
+      /* THEME OVERRIDES for author-info h4 and enhanced team-modal */
+@media (prefers-color-scheme: dark) {
+  .author-info h4 {
+    color: #fafafa !important;
+  }
+  .team-modal .modal-content {
+    background: #181818 !important;
+    color: #fafafa !important;
+    border: 1px solid #333 !important;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5) !important;
+  }
+  .team-modal {
+    background-color: rgba(0,0,0,0.85) !important;
+    backdrop-filter: blur(10px);
+  }
+}
+@media (prefers-color-scheme: light) {
+  .author-info h4 {
+    color: #111 !important;
+  }
+  .team-modal .modal-content {
+    background: #fff !important;
+    color: #111 !important;
+    border: 1px solid #eee !important;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.10) !important;
+  }
+  .team-modal {
+    background-color: rgba(0,0,0,0.08) !important;
+    backdrop-filter: blur(4px);
+  }
+}
+
+      /* Contact section */
+      .contact {
+        padding: 8rem 2rem;
+        /* Enhanced contact with subtle white overlay */
+        background: rgba(0, 0, 0, 0.02);
+        backdrop-filter: blur(10px);
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        color: #ffffff; /* Set text color to white */
+      }
+
+      .contact-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: start;
+      }
+
+      .contact-info {
+        padding: 2rem 0;
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: rgba(0, 0, 0, 0.05);
+        border-radius: 15px;
+        border: 1px solid rgba(255, 107, 53, 0.1);
+        color: #ffffff; /* Set text color to white */
+      }
+
+      .contact-icon {
+        width: 50px;
+        height: 50px;
+        background: var(--gradient-primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.2rem;
+      }
+
+      .contact-details h4 {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #b0b0b0;
+      }
+
+      .contact-details p {
+        margin: 0.25rem 0 0;
+        color: #666666;
+      }
+
+      .contact-form {
+        background: #3333337f;
+        padding: 3rem;
+        border-radius: 25px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 107, 53, 0.1);
+        color: #ffffff; /* Set text color to white */
+      }
+
+      .form-group {
+        margin-bottom: 2rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: #ffffff; /* Set text color to white */
+      }
+
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 1rem;
+        border: 2px solid rgba(255, 107, 53, 0.1);
+        border-radius: 10px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+        background: #33333380;
+        color: #ffffff; /* Set text color to white */
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: var(--primary-orange);
+      }
+
+      .form-group textarea {
+        resize: vertical;
+        min-height: 120px;
+      }
+
+      .submit-btn {
+        width: 100%;
+        padding: 1rem 2rem;
+        background: var(--gradient-primary);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        color: #ffffff; /* Set text color to white */
+      }
+
+      .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+      }
+
+      /* Footer */
+      .footer {
+        /* Updated footer to use theme-aware background */
+        background: var(--footer-bg);
+        backdrop-filter: blur(20px);
+        padding: 4rem 2rem 2rem;
+        border-top: 1px solid var(--border-color);
+      }
+
+      .footer-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 3rem;
+      }
+
+      .footer-section h4 {
+        color: var(--primary-orange);
+        font-family: "Poppins", sans-serif;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        font-size: 1.1rem;
+      }
+
+      .footer-section a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        display: block;
+        margin-bottom: 0.8rem;
+        transition: all 0.3s ease;
+        font-weight: 500;
+      }
+
+      .footer-section a:hover {
+        color: var(--text-primary);
+        transform: translateX(5px);
+      }
+
+      .footer-bottom {
+        text-align: center;
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: var(--text-secondary);
+      }
+
+      .team-modal {
+        display: none;
+        position: fixed;
+        z-index: 10000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        animation: modalFadeIn 0.3s ease-out;
+      }
+
+      @keyframes modalFadeIn {
+        from {
+          opacity: 0;
+          backdrop-filter: blur(0px);
+        }
+        to {
+          opacity: 1;
+          backdrop-filter: blur(15px);
+        }
+      }
+
+      .team-modal-content {
+        background: var(--card-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        margin: 2% auto;
+        padding: 3rem;
+        border-radius: 25px;
+        width: 95%;
+        max-width: 1200px;
+        border: 1px solid rgba(255, 107, 53, 0.2);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        position: relative;
+        animation: modalSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        overflow: hidden;
+      }
+
+      @keyframes modalSlideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-50px) scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .team-modal-content::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--primary-orange), var(--accent-blue), var(--success-green));
+        animation: gradientShift 3s ease-in-out infinite;
+      }
+
+      @keyframes gradientShift {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+      }
+
+      .close {
+        color: var(--text-secondary);
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        font-size: 2rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+      }
+
+      .close:hover {
+        color: var(--primary-orange);
+        background: rgba(255, 107, 53, 0.2);
+        transform: rotate(90deg);
+      }
+
+      .team-header {
+        text-align: center;
+        margin-bottom: 3rem;
+        position: relative;
+      }
+
+      .team-title {
+        font-family: "Poppins", sans-serif;
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+        background: linear-gradient(135deg, var(--primary-orange), var(--accent-blue));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: titleGlow 2s ease-in-out infinite alternate;
+      }
+
+      @keyframes titleGlow {
+        0% { filter: drop-shadow(0 0 5px rgba(255, 107, 53, 0.3)); }
+        100% { filter: drop-shadow(0 0 15px rgba(255, 107, 53, 0.6)); }
+      }
+
+      .team-subtitle {
+        color: var(--text-secondary);
+        font-size: 1.1rem;
+        font-weight: 500;
+        margin: 0;
+      }
+
+      .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .team-member {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 2rem;
+        text-align: center;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        animation: memberFadeIn 0.6s ease-out both;
+      }
+
+      .team-member:nth-child(1) { animation-delay: 0.1s; }
+      .team-member:nth-child(2) { animation-delay: 0.2s; }
+      .team-member:nth-child(3) { animation-delay: 0.3s; }
+      .team-member:nth-child(4) { animation-delay: 0.4s; }
+      .team-member:nth-child(5) { animation-delay: 0.5s; }
+      .team-member:nth-child(6) { animation-delay: 0.6s; }
+
+      @keyframes memberFadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(30px) scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .team-member::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(0, 212, 255, 0.05));
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: -1;
+      }
+
+      .team-member:hover::before {
+        opacity: 1;
+      }
+
+      .team-member:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
+        border-color: rgba(255, 107, 53, 0.3);
+      }
+
+      .member-avatar {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 1.5rem;
+        background: linear-gradient(135deg, var(--primary-orange), var(--accent-blue));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        color: white;
+        box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+        transition: all 0.3s ease;
+      }
+
+      .team-member:hover .member-avatar {
+        transform: scale(1.1);
+        box-shadow: 0 12px 35px rgba(255, 107, 53, 0.4);
+      }
+
+      .member-info h4 {
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+        font-size: 1.3rem;
+        font-weight: 700;
+        font-family: "Poppins", sans-serif;
+      }
+
+      .member-role {
+        color: var(--primary-orange);
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .member-skills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: center;
+      }
+
+      .skill-tag {
+        background: rgba(255, 107, 53, 0.1);
+        color: var(--primary-orange);
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        border: 1px solid rgba(255, 107, 53, 0.2);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+      }
+
+      .skill-tag::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.2), transparent);
+        transition: left 0.5s ease;
+      }
+
+      .skill-tag:hover::before {
+        left: 100%;
+      }
+
+      .skill-tag:hover {
+        background: var(--primary-orange);
+        color: white;
+        transform: translateY(-2px) scale(1.05);
+        box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+      }
+
+      .team-footer {
+        text-align: center;
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        animation: footerFadeIn 1s ease-out 0.8s both;
+      }
+
+      @keyframes footerFadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .team-footer-text {
+        color: var(--text-secondary);
+        font-size: 1rem;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: color 0.3s ease;
+      }
+
+      .team-footer-text:hover {
+        color: var(--text-primary);
+      }
+
+      .team-footer-text i {
+        animation: heartPulse 2s ease-in-out infinite;
+      }
+
+      @keyframes heartPulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.2); }
+      }
+
+      /* Enhanced responsive design */
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .nav-menu {
+          display: none;
+        }
+
+        .floating-stats {
+          display: none;
+        }
+
+        .table-header,
+        .comparison-table th {
+          display: none;
+        }
+
+        .comparison-table td {
+          display: block;
+          width: 100%;
+          text-align: left;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .comparison-table tr {
+          margin-bottom: 1rem;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 10px;
+          overflow: hidden;
+        }
+
+        .comparison-table td:before {
+          content: attr(data-header);
+          display: block;
+          font-weight: bold;
+          margin-bottom: 0.5rem;
+          color: var(--primary-orange);
+        }
+
+        .hero-buttons {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .section-title {
+          font-size: 2rem;
+        }
+
+        .contact-content {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+
+        /* Team modal responsive */
+        .team-modal-content {
+          margin: 1rem;
+          padding: 2rem 1.5rem;
+          max-width: none;
+        }
+
+        .team-title {
+          font-size: 2rem;
+        }
+
+        .team-grid {
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
+
+        .team-member {
+          padding: 1.5rem;
+        }
+
+        .member-avatar {
+          width: 60px;
+          height: 60px;
+          font-size: 1.5rem;
+        }
+
+        .member-info h4 {
+          font-size: 1.1rem;
+        }
+
+        .member-role {
+          font-size: 0.9rem;
+        }
+
+        .member-skills {
+          gap: 0.3rem;
+        }
+
+        .skill-tag {
+          font-size: 0.7rem;
+          padding: 0.2rem 0.6rem;
+        }
+      }
+
+      /* Enhanced scroll animations */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .slide-in-left {
+        opacity: 0;
+        transform: translateX(-50px);
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .slide-in-left.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .slide-in-right {
+        opacity: 0;
+        transform: translateX(50px);
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .slide-in-right.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      /* THEME OVERRIDES for .service-card and header/nav text */
+@media (prefers-color-scheme: light) {
+  .service-card {
+    background: #fff !important;
+    color: #222 !important;
+    border: 1px solid #eee !important;
+  }
+  .logo,
+  .nav-menu a,
+  .btn {
+    color: #222 !important;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .service-card {
+    background: #181818 !important;
+    color: #fff !important;
+    border: 1px solid rgba(255, 107, 53, 0.1) !important;
+  }
+  .logo,
+  .nav-menu a,
+  .btn {
+    color: #fff !important;
+  }
+}
+
+/* THEME OVERRIDES for text color in dark/light mode */
+@media (prefers-color-scheme: light) {
+  .testimonial-text,
+  .contact-details p,
+  .comparison-table th,
+  .hero p,
+  .stat-text,
+  .footer-content,
+  .footer-section a,
+  .footer-bottom {
+    color: #222 !important;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .testimonial-text,
+  .contact-details p,
+  .comparison-table th,
+  .hero p,
+  .stat-text,
+  .footer-content,
+  .footer-section a,
+  .footer-bottom {
+    color: #fff !important;
+  }
+}
+
+/* THEME OVERRIDES for comparison-table features column and demo-button hover */
+@media (prefers-color-scheme: dark) {
+  .comparison-table td:first-child {
+     background: rgba(10, 10, 10, 0.026) !important; /* Match parent column background */
+     color: #fff !important;
+     border-right: 1px solid rgba(255,107,53,0.1);
+     box-shadow: 0 2px 8px rgba(255,107,53,0.08);
+  }
+  .comparison-table tr:hover td:first-child {
+     background: rgba(30,30,30,0.95) !important;
+  }
+  .demo-button:hover {
+    color: #fff !important;
+    border-color: #ED7550 !important;
+  }
+}
+@media (prefers-color-scheme: light) {
+  .comparison-table td:first-child {
+     background: rgba(255,255,255,0.08) !important; /* Match parent column background */
+     color: #222 !important;
+     border-right: 1px solid #f3e6e0;
+     box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  }
+  .comparison-table tr:hover td:first-child {
+     background: rgba(255,255,255,0.16) !important;
+  }
+  .demo-button:hover {
+    color: #ED7550 !important;
+    border-color: #ED7550 !important;
+  }
+}
+    </style>
+  </head>
+  <body>
+    <!-- Enhanced header with MediTrack+ branding -->
+    <header class="header" id="header">
+      <nav class="nav">
+        <a href="#home" class="logo">
+          <i class="fas fa-heartbeat"></i>
+          MediTrack+
+        </a>
+        <ul class="nav-menu">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#competitive-advantage">Comparison</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="nav-buttons">
+          <a href="auth/login.html" class="btn btn-secondary">Login</a>
+          <a href="auth/signup.html" class="btn btn-primary">Get Started</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Enhanced hero section with healthcare focus -->
+    <section class="hero" id="home">
+      <!-- Floating Stats -->
+      <div class="floating-stats">
+        <div class="stat-item">
+          <i class="fas fa-shield-alt stat-icon"></i>
+          <div>
+            <div class="stat-text">HIPAA Compliant</div>
+            <div style="font-size: 0.8rem; color: var(--text-secondary)">
+              100% Secure
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="floating-stats">
+        <div class="stat-item">
+          <i class="fas fa-brain stat-icon"></i>
+          <div>
+            <div class="stat-text">AI Diagnostics</div>
+            <div style="font-size: 0.8rem; color: var(--text-secondary)">
+              99.7% Accuracy
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="floating-stats">
+        <div class="stat-item">
+          <i class="fas fa-clock stat-icon"></i>
+          <div>
+            <div class="stat-text">24/7 Support</div>
+            <div style="font-size: 0.8rem; color: var(--text-secondary)">
+              Always Available
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-content">
+        <div class="hero-badge">🚀 Next-Generation Healthcare Technology</div>
+        <h1>
+          Transform Your <span class="highlight">Healthcare Practice</span> with AI
+        </h1>
+        <p>
+          Join thousands of healthcare professionals who trust MediTrack+ for intelligent patient management, AI-powered diagnostics, and seamless practice operations. Experience the future of healthcare today.
+        </p>
+
+        <div class="hero-buttons">
+          <button
+            class="cta-button"
+            onclick="window.location.href='auth/signup.html'"
+          >
+            Start Free Trial
+          </button>
+          <a href="#how-it-works" class="demo-button">
+            <i class="fas fa-play-circle"></i>
+            See How It Works
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Enhanced stats section -->
+    <section class="stats fade-in">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-number">50K+</span>
+          <div class="stat-label">Healthcare Professionals</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">99.7%</span>
+          <div class="stat-label">Diagnostic Accuracy</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">24/7</span>
+          <div class="stat-label">Support Available</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">100%</span>
+          <div class="stat-label">HIPAA Compliant</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works section -->
+    <section class="how-it-works fade-in" id="how-it-works">
+      <div class="section-header">
+        <div class="section-badge">⚡ Simple 4-Step Process</div>
+        <h2 class="section-title">
+          How <span style="color: var(--primary-orange)">MediTrack+</span> Works
+        </h2>
+        <p class="section-subtitle">
+          Get started in minutes with our intuitive platform designed for healthcare professionals.
+        </p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3 class="step-title">Sign Up & Setup</h3>
+          <p class="step-description">
+            Create your account and configure your practice settings. Our guided setup ensures you're ready to go in under 10 minutes.
+          </p>
+          <div class="step-arrow">→</div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3 class="step-title">Import Patient Data</h3>
+          <p class="step-description">
+            Securely import existing patient records or start fresh. Our HIPAA-compliant system ensures complete data security.
+          </p>
+          <div class="step-arrow">→</div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3 class="step-title">AI-Powered Care</h3>
+          <p class="step-description">
+            Leverage our AI diagnostics for faster, more accurate assessments. Access real-time insights and treatment recommendations.
+          </p>
+          <div class="step-arrow">→</div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <h3 class="step-title">Scale & Optimize</h3>
+          <p class="step-description">
+            Monitor performance with detailed analytics. Expand your practice with mobile access, telemedicine, and automated workflows.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Enhanced services section -->
+    <section class="services fade-in" id="services">
+      <div class="section-header">
+        <div class="section-badge">🏥 Comprehensive Healthcare Solutions</div>
+        <h2 class="section-title">
+          Complete <span style="color: var(--primary-orange)">Healthcare Platform</span>
+        </h2>
+        <p class="section-subtitle">
+          Everything you need to manage your practice efficiently, from patient intake to treatment planning and follow-up care.
+        </p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card slide-in-left">
+          <div class="service-icon">
+            <i class="fas fa-brain"></i>
+          </div>
+          <h3 class="service-title">AI-Powered Diagnostics</h3>
+          <p class="service-description">
+            Advanced machine learning algorithms provide diagnostic assistance with 99.7% accuracy. Get instant second opinions and treatment recommendations based on millions of medical cases.
+          </p>
+        </div>
+
+        <div class="service-card fade-in">
+          <div class="service-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3 class="service-title">Smart Patient Management</h3>
+          <p class="service-description">
+            Comprehensive EHR system with intelligent scheduling, automated reminders, and predictive analytics for patient no-shows. Streamline your entire patient journey from booking to discharge.
+          </p>
+        </div>
+
+        <div class="service-card slide-in-right">
+          <div class="service-icon">
+            <i class="fas fa-pills"></i>
+          </div>
+          <h3 class="service-title">Intelligent Prescription System</h3>
+          <p class="service-description">
+            Digital prescriptions with real-time drug interaction checking, allergy alerts, and formulary compliance. Electronic prescribing ensures accuracy and patient safety.
+          </p>
+        </div>
+
+        <div class="service-card slide-in-left">
+          <div class="service-icon">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <h3 class="service-title">Advanced Analytics Dashboard</h3>
+          <p class="service-description">
+            Real-time insights into practice performance, patient outcomes, and operational efficiency. Make data-driven decisions with comprehensive reporting and trend analysis.
+          </p>
+        </div>
+
+        <div class="service-card fade-in">
+          <div class="service-icon">
+            <i class="fas fa-mobile-alt"></i>
+          </div>
+          <h3 class="service-title">Mobile-First Design</h3>
+          <p class="service-description">
+            Access patient information anywhere with our responsive mobile app. Dictate notes, review charts, and manage prescriptions on-the-go with full HIPAA compliance.
+          </p>
+        </div>
+
+        <div class="service-card slide-in-right">
+          <div class="service-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3 class="service-title">Enterprise Security</h3>
+          <p class="service-description">
+            Bank-level encryption, multi-factor authentication, and comprehensive audit trails. Fully HIPAA, GDPR, and SOC 2 compliant with 99.99% uptime guarantee.
+          </p>
+        </div>
+
+        <div class="service-card slide-in-left">
+          <div class="service-icon">
+            <i class="fas fa-video"></i>
+          </div>
+          <h3 class="service-title">Telemedicine Integration</h3>
+          <p class="service-description">
+            Built-in video consultations with secure patient portals. Expand your reach and provide convenient care with integrated telehealth capabilities.
+          </p>
+        </div>
+
+        <div class="service-card fade-in">
+          <div class="service-icon">
+            <i class="fas fa-robot"></i>
+          </div>
+          <h3 class="service-title">Automation & AI</h3>
+          <p class="service-description">
+            Automate routine tasks with AI-powered workflows. From appointment scheduling to insurance claims, let our intelligent system handle the busy work.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features section -->
+    <section class="features fade-in">
+      <div class="section-header">
+        <div class="section-badge">✨ Advanced Features</div>
+        <h2 class="section-title">
+          Built for <span style="color: var(--primary-orange)">Modern Healthcare</span>
+        </h2>
+        <p class="section-subtitle">
+          Cutting-edge features that set MediTrack+ apart from traditional EHR systems.
+        </p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-infinity"></i>
+          </div>
+          <h3 class="feature-title">Offline Mode</h3>
+          <p class="feature-description">
+            Never lose productivity during connectivity issues. Our offline-first architecture ensures you can continue working seamlessly.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-bolt"></i>
+          </div>
+          <h3 class="feature-title">Real-Time Sync</h3>
+          <p class="feature-description">
+            Instant synchronization across all devices. Changes made on one device appear everywhere in real-time.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-microchip"></i>
+          </div>
+          <h3 class="feature-title">AI Assistant</h3>
+          <p class="feature-description">
+            Intelligent assistant that learns your preferences and automates routine tasks, freeing you to focus on patient care.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-cloud"></i>
+          </div>
+          <h3 class="feature-title">Cloud-Native</h3>
+          <p class="feature-description">
+            Built for the cloud with automatic scaling, disaster recovery, and global accessibility from day one.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-lock"></i>
+          </div>
+          <h3 class="feature-title">Zero-Trust Security</h3>
+          <p class="feature-description">
+            Every request is authenticated and authorized. No data leaves our secure perimeter without explicit permission.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-code-branch"></i>
+          </div>
+          <h3 class="feature-title">API-First Design</h3>
+          <p class="feature-description">
+            Comprehensive REST APIs allow seamless integration with existing systems, labs, and third-party applications.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Enhanced competitive advantage section -->
+    <section class="competitive-advantage fade-in" id="competitive-advantage">
+      <div class="section-header">
+        <div class="section-badge">🏆 Market Leadership</div>
+        <h2 class="section-title">
+          Competitive
+          <span style="color: var(--primary-orange)">Advantage</span>
+        </h2>
+        <p class="section-subtitle">
+          See how MediTrack+ stands out from the competition with superior
+          features and unmatched value.
+        </p>
+      </div>
+
+      <div class="comparison-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Practo</th>
+              <th>Lybrate</th>
+              <th>HealthPix</th>
+              <th class="meditrack-column">MediTrack+</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-header="Feature">Offline Mode</td>
+              <td data-header="Practo">
+                <i class="fas fa-times cross-icon"></i>
+              </td>
+              <td data-header="Lybrate">
+                <i class="fas fa-times cross-icon"></i>
+              </td>
+              <td data-header="HealthPix">
+                <i class="fas fa-times cross-icon"></i>
+              </td>
+              <td data-header="MediTrack+" class="meditrack-column">
+                <i class="fas fa-check check-icon"></i>
+              </td>
+            </tr>
+            <tr>
+              <td data-header="Feature">AI Diagnosis</td>
+              <td data-header="Practo">
+                <i class="fas fa-times cross-icon"></i>
+              </td>
+              <td data-header="Lybrate">
+                <i class="fas fa-times cross-icon"></i>
+              </td>
+              <td data-header="HealthPix">
+                <span class="limited-text">Limited</span>
+              </td>
+              <td data-header="MediTrack+" class="meditrack-column">
+                <i class="fas fa-check check-icon"></i>
+              </td>
+            </tr>
+            <tr>
+              <td data-header="Feature">Cost-Effective</td>
+              <td data-header="Practo">
+                <i class="fas fa-times cross-icon"></i>
+              </td>
+              <td data-header="Lybrate">
+                <i class="fas fa-times cross-icon"></i>
+              </td>
+              <td data-header="HealthPix">
+                <i class="fas fa-times cross-icon"></i>
+              </td>
+              <td data-header="MediTrack+" class="meditrack-column">
+                <i class="fas fa-check check-icon"></i>
+              </td>
+            </tr>
+            <tr>
+              <td data-header="Feature">HIPAA Compliance</td>
+              <td data-header="Practo">
+                <i class="fas fa-check check-icon"></i>
+              </td>
+              <td data-header="Lybrate">
+                <span class="limited-text">Partial</span>
+              </td>
+              <td data-header="HealthPix">
+                <i class="fas fa-check check-icon"></i>
+              </td>
+              <td data-header="MediTrack+" class="meditrack-column">
+                <i class="fas fa-check check-icon"></i>
+              </td>
+            </tr>
+            <tr>
+              <td data-header="Feature">24/7 Support</td>
+              <td data-header="Practo">
+                <i class="fas fa-times cross-icon"></i>
+              </td>
+              <td data-header="Lybrate">
+                <i class="fas fa-times cross-icon"></i>
+              </td>
+              <td data-header="HealthPix">
+                <span class="limited-text">Business Hours</span>
+              </td>
+              <td data-header="MediTrack+" class="meditrack-column">
+                <i class="fas fa-check check-icon"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Added testimonials section -->
+    <section class="testimonials fade-in" id="testimonials">
+      <div class="section-header">
+        <div class="section-badge">💬 What Healthcare Professionals Say</div>
+        <h2 class="section-title">
+          Trusted by <span style="color: var(--primary-orange)">Thousands</span>
+        </h2>
+        <p class="section-subtitle">
+          See what healthcare professionals are saying about MediTrack+ and how
+          it's transforming their practice.
+        </p>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <p class="testimonial-text">
+            "MediTrack+ has revolutionized our clinic operations. The AI
+            diagnostics feature has improved our accuracy by 40% and the offline
+            mode ensures we never lose patient data."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">DR</div>
+            <div class="author-info">
+              <h4>Dr. Sarah Rodriguez</h4>
+              <p>Chief Medical Officer, City General Hospital</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">
+            "The cost savings alone have been incredible. We've reduced our
+            operational costs by 60% while improving patient satisfaction scores
+            across the board."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">MP</div>
+            <div class="author-info">
+              <h4>Dr. Michael Patel</h4>
+              <p>Director, Regional Medical Center</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">
+            "The 24/7 support team is exceptional. They've helped us through
+            every step of implementation and continue to provide outstanding
+            service."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">EJ</div>
+            <div class="author-info">
+              <h4>Dr. Emily Johnson</h4>
+              <p>Practice Manager, Family Health Clinic</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ section -->
+    <section class="faq fade-in">
+      <div class="section-header">
+        <div class="section-badge">❓ Frequently Asked Questions</div>
+        <h2 class="section-title">
+          Your <span style="color: var(--primary-orange)">Questions</span> Answered
+        </h2>
+        <p class="section-subtitle">
+          Everything you need to know about getting started with MediTrack+.
+        </p>
+      </div>
+
+      <div class="faq-container">
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>How secure is my patient data?</h3>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Your patient data is protected with bank-level encryption, multi-factor authentication, and comprehensive audit trails. We're fully HIPAA, GDPR, and SOC 2 compliant with 99.99% uptime guarantee.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>Can I use MediTrack+ offline?</h3>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Yes! Our offline-first architecture ensures you can continue working seamlessly during connectivity issues. All data syncs automatically when you're back online.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>How accurate is the AI diagnostics?</h3>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Our AI achieves 99.7% diagnostic accuracy, trained on millions of medical cases. It serves as a powerful second opinion tool, not a replacement for clinical judgment.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>What kind of support do you provide?</h3>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>We offer 24/7 technical support, comprehensive documentation, video tutorials, and dedicated account managers for enterprise clients.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>Can I integrate with my existing systems?</h3>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Absolutely! Our API-first design allows seamless integration with existing EHR systems, labs, pharmacies, and third-party applications.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>What's included in the free trial?</h3>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Full access to all features for 30 days, including AI diagnostics, patient management, analytics, and 24/7 support. No credit card required.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Added contact section -->
+    <section class="contact fade-in" id="contact">
+      <div class="section-header">
+        <div class="section-badge">📞 Get In Touch</div>
+        <h2 class="section-title">
+          Contact <span style="color: var(--primary-orange)">Us</span>
+        </h2>
+        <p class="section-subtitle">
+          Ready to transform your healthcare practice? Get in touch with our
+          team today.
+        </p>
+      </div>
+
+      <div class="contact-content">
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-phone"></i>
+            </div>
+            <div class="contact-details">
+              <h4>Phone</h4>
+              <p>+1 (555) 123-4567</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="contact-details">
+              <h4>Email</h4>
+              <p>contact@meditrack.com</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="contact-details">
+              <h4>Address</h4>
+              <p>123 Healthcare Ave, Medical District, NY 10001</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div class="contact-details">
+              <h4>Business Hours</h4>
+              <p>24/7 Support Available</p>
+            </div>
+          </div>
+        </div>
+
+        <form class="contact-form" onsubmit="submitForm(event)">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" />
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              placeholder="Tell us about your healthcare needs..."
+              required
+            ></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn" id="submitBtn">Send Message</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Enhanced footer with organized links -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <div class="logo" style="margin-bottom: 1.5rem">
+            <i class="fas fa-heartbeat"></i>
+            MediTrack+
+          </div>
+          <p style="color: var(--text-secondary); line-height: 1.7">
+            Revolutionizing healthcare management with AI-powered solutions for
+            better patient outcomes.
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h4>Product</h4>
+          <a href="#features">Features</a>
+          <a href="#services">Services</a>
+          <a href="#competitive-advantage">Comparison</a>
+          <a href="pages/pricing.html">Pricing</a>
+          <a href="pages/security.html">Security</a>
+        </div>
+
+        <div class="footer-section">
+          <h4>Company</h4>
+          <a href="pages/about-us.html">About Us</a>
+          <a href="pages/careers.html">Careers</a>
+          <a href="pages/blog.html">Blog</a>
+          <a href="pages/press-kit.html">Press Kit</a>
+          <a href="pages/contact.html">Contact</a>
+        </div>
+
+        <div class="footer-section">
+          <h4>Resources</h4>
+          <a href="pages/documentation.html">Documentation</a>
+          <a href="pages/api-reference.html">API Reference</a>
+          <a href="pages/help-center.html">Help Center</a>
+          <a href="pages/case-studies.html">Case Studies</a>
+          <a href="pages/webinars.html">Webinars</a>
+        </div>
+
+        <div class="footer-section">
+          <h4>Legal</h4>
+          <a href="pages/privacy-policy.html">Privacy Policy</a>
+          <a href="pages/terms-of-service.html">Terms of Service</a>
+          <a href="pages/cookie-policy.html">Cookie Policy</a>
+          <a href="pages/compliance.html">Compliance</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>
+          © 2025 MediTrack+. All rights reserved. |
+          <a
+            href="#"
+            onclick="openTeamModal()"
+            style="color: var(--primary-orange); text-decoration: none"
+            >Meet the Team</a
+          >
+        </p>
+      </div>
+    </footer>
+
+    <!-- Enhanced Team modal -->
+    <div id="teamModal" class="team-modal">
+      <div class="modal-content team-modal-content">
+        <span class="close" onclick="closeTeamModal()">&times;</span>
+        <div class="team-header">
+          <h2 class="team-title">
+            <i class="fas fa-users" style="margin-right: 0.5rem;"></i>
+            Meet Our Team
+          </h2>
+          <p class="team-subtitle">The brilliant minds behind MediTrack+</p>
+        </div>
+        <div class="team-grid">
+          <div class="team-member">
+            <div class="member-avatar">
+              <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="member-info">
+              <h4>Neelkanth Patel</h4>
+              <p class="member-role">Frontend Developer</p>
+              <div class="member-skills">
+                <span class="skill-tag">React</span>
+                <span class="skill-tag">TypeScript</span>
+                <span class="skill-tag">UI/UX</span>
+              </div>
+            </div>
+          </div>
+          <div class="team-member">
+            <div class="member-avatar">
+              <i class="fas fa-brain"></i>
+            </div>
+            <div class="member-info">
+              <h4>Nayak Dhruv</h4>
+              <p class="member-role">Backend & AI Engineer</p>
+              <div class="member-skills">
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">ML</span>
+                <span class="skill-tag">API</span>
+              </div>
+            </div>
+          </div>
+          <div class="team-member">
+            <div class="member-avatar">
+              <i class="fas fa-database"></i>
+            </div>
+            <div class="member-info">
+              <h4>Nirmal Dhruv</h4>
+              <p class="member-role">Data Architect</p>
+              <div class="member-skills">
+                <span class="skill-tag">SQL</span>
+                <span class="skill-tag">Analytics</span>
+                <span class="skill-tag">Big Data</span>
+              </div>
+            </div>
+          </div>
+          <div class="team-member">
+            <div class="member-avatar">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="member-info">
+              <h4>Nirmal Dhyey</h4>
+              <p class="member-role">Data Architect</p>
+              <div class="member-skills">
+                <span class="skill-tag">Data Science</span>
+                <span class="skill-tag">Visualization</span>
+                <span class="skill-tag">ETL</span>
+              </div>
+            </div>
+          </div>
+          <div class="team-member">
+            <div class="member-avatar">
+              <i class="fas fa-cogs"></i>
+            </div>
+            <div class="member-info">
+              <h4>Nirmit Sheth</h4>
+              <p class="member-role">Backend & AI Engineer</p>
+              <div class="member-skills">
+                <span class="skill-tag">Node.js</span>
+                <span class="skill-tag">AI/ML</span>
+                <span class="skill-tag">Cloud</span>
+              </div>
+            </div>
+          </div>
+          <div class="team-member">
+            <div class="member-avatar">
+              <i class="fas fa-magic"></i>
+            </div>
+            <div class="member-info">
+              <h4>Panchal Darshil</h4>
+              <p class="member-role">QA & UI Enhancer</p>
+              <div class="member-skills">
+                <span class="skill-tag">Testing</span>
+                <span class="skill-tag">Design</span>
+                <span class="skill-tag">UX</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="team-footer">
+          <p class="team-footer-text">
+            <i class="fas fa-heart" style="color: var(--primary-orange); margin-right: 0.5rem;"></i>
+            Built with passion by Group 1 CE-5C
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Updated theme switching logic
+      function handleThemeChange() {
+        // Force a repaint to ensure theme changes are applied immediately
+        document.documentElement.style.display = 'none';
+        document.documentElement.offsetHeight; // Trigger reflow
+        document.documentElement.style.display = '';
+      }
+
+      // Listen for system theme changes
+      if (window.matchMedia) {
+        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        mediaQuery.addListener(handleThemeChange);
+        
+        // Also listen for light theme changes
+        const lightMediaQuery = window.matchMedia('(prefers-color-scheme: light)');
+        lightMediaQuery.addListener(handleThemeChange);
+      }
+
+      let lastScrollTop = 0;
+      const header = document.getElementById("header");
+
+      window.addEventListener("scroll", function () {
+        let scrollTop =
+          window.pageYOffset || document.documentElement.scrollTop;
+
+        // Hide/show header on scroll
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+          header.classList.add("hidden");
+        } else {
+          header.classList.remove("hidden");
+        }
+        lastScrollTop = scrollTop;
+
+        // Animate elements on scroll
+        const elements = document.querySelectorAll(
+          ".fade-in, .slide-in-left, .slide-in-right"
+        );
+        elements.forEach((element) => {
+          const elementTop = element.getBoundingClientRect().top;
+          const elementVisible = 150;
+
+          if (elementTop < window.innerHeight - elementVisible) {
+            element.classList.add("visible");
+          }
+        });
+      });
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Enhanced scroll-triggered animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in');
+          }
+        });
+      }, observerOptions);
+
+      // Observe elements for animation
+      document.querySelectorAll('.service-card, .stat-card, .testimonial-card, .feature-item').forEach(card => {
+        observer.observe(card);
+      });
+
+      // Enhanced header scroll effect
+      let lastScrollTop = 0;
+      const header = document.querySelector('.header');
+
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+          // Scrolling down
+          header.classList.add('hidden');
+        } else {
+          // Scrolling up
+          header.classList.remove('hidden');
+        }
+
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+
+        // Add scrolled class for background change
+        if (scrollTop > 50) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      });
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+
+      // Team modal functions
+      function openTeamModal() {
+        document.getElementById("teamModal").style.display = "block";
+      }
+
+      function closeTeamModal() {
+        document.getElementById("teamModal").style.display = "none";
+      }
+
+      // Close modal when clicking outside
+      window.onclick = function (event) {
+        const modal = document.getElementById("teamModal");
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
+
+      // Enhanced button interactions with ripple effect
+      document.querySelectorAll(".btn, .cta-button, .demo-button").forEach((button) => {
+        button.addEventListener("click", function (e) {
+          // Create ripple effect
+          const ripple = document.createElement('span');
+          ripple.classList.add('ripple');
+          this.appendChild(ripple);
+
+          const rect = this.getBoundingClientRect();
+          const size = Math.max(rect.width, rect.height);
+          const x = e.clientX - rect.left - size / 2;
+          const y = e.clientY - rect.top - size / 2;
+
+          ripple.style.width = ripple.style.height = size + 'px';
+          ripple.style.left = x + 'px';
+          ripple.style.top = y + 'px';
+
+          setTimeout(() => {
+            ripple.remove();
+          }, 600);
+
+          // Button press effect
+          this.style.transform = "scale(0.95)";
+          setTimeout(() => {
+            this.style.transform = "";
+          }, 150);
+        });
+      });
+
+      // Mouse follower effect
+      const cursor = document.createElement('div');
+      cursor.className = 'cursor-follower';
+      document.body.appendChild(cursor);
+
+      let mouseX = 0;
+      let mouseY = 0;
+      let cursorX = 0;
+      let cursorY = 0;
+
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      function updateCursor() {
+        cursorX += (mouseX - cursorX) * 0.1;
+        cursorY += (mouseY - cursorY) * 0.1;
+
+        cursor.style.left = cursorX + 'px';
+        cursor.style.top = cursorY + 'px';
+
+        requestAnimationFrame(updateCursor);
+      }
+      updateCursor();
+
+      // Enhanced hover effects
+      document.querySelectorAll('a, button, .service-card, .stat-card, .floating-stats').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          cursor.classList.add('cursor-hover');
+        });
+        el.addEventListener('mouseleave', () => {
+          cursor.classList.remove('cursor-hover');
+        });
+      });
+
+      // Simple contact form submission
+      function submitForm(event) {
+        event.preventDefault();
+        
+        const btn = document.getElementById('submitBtn');
+        btn.textContent = 'Sending...';
+        btn.disabled = true;
+        
+        const data = {
+          name: document.getElementById('name').value,
+          email: document.getElementById('email').value,
+          phone: document.getElementById('phone').value,
+          message: document.getElementById('message').value
+        };
+        
+        fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(result => {
+          alert('Thank you for your message! Our team has received it and will contact you shortly.');
+          document.querySelector('.contact-form').reset();
+        })
+        .catch(error => {
+          alert('Error sending message. Please try again.');
+        })
+        .finally(() => {
+          btn.textContent = 'Send Message';
+          btn.disabled = false;
+        });
+      }
+
+      // FAQ accordion functionality
+      document.querySelectorAll('.faq-question').forEach(question => {
+        question.addEventListener('click', () => {
+          const faqItem = question.parentElement;
+          const isActive = faqItem.classList.contains('active');
+
+          // Close all FAQ items
+          document.querySelectorAll('.faq-item').forEach(item => {
+            item.classList.remove('active');
+          });
+
+          // Open clicked item if it wasn't active
+          if (!isActive) {
+            faqItem.classList.add('active');
+          }
+        });
+      });
+    </script>
+
+    <style>
+      /* Mouse follower cursor */
+      .cursor-follower {
+        position: fixed;
+        width: 20px;
+        height: 20px;
+        background: rgba(255, 107, 53, 0.3);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 107, 53, 0.5);
+      }
+
+      .cursor-follower.cursor-hover {
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 107, 53, 0.5);
+        border-color: rgba(255, 107, 53, 0.8);
+      }
+
+      /* Enhanced glassmorphism effects */
+      .glass-effect {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        .glass-effect {
+          background: rgba(255, 255, 255, 0.05);
+          border-color: rgba(255, 255, 255, 0.1);
+        }
+      }
+
+      /* Popup animation */
+      @keyframes popupSlideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-50px) scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+      
+      /* Success popup styling */
+      .success-popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+        backdrop-filter: blur(5px);
+      }
+      
+      .popup-content {
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        text-align: center;
+        max-width: 400px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        animation: popupSlideIn 0.3s ease-out;
+      }
+      
+      @media (prefers-color-scheme: dark) {
+        .popup-content {
+          background: #1a1a1a;
+          color: white;
+        }
+        .popup-content h3 {
+          color: white !important;
+        }
+        .popup-content p {
+          color: #ccc !important;
+        }
+      }
+
+      .service-card,
+      .stat-card,
+      .floating-stats,
+      .header {
+        will-change: transform;
+      }
+
+      /* Accessibility improvements */
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </body>
+</html>
