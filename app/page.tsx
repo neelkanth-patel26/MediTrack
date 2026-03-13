@@ -11,6 +11,7 @@ import {
   Monitor, Database, Cpu, Palette, Rocket, Hospital, HelpCircle, Phone
 } from 'lucide-react'
 import { useTheme } from '@/lib/theme-context'
+import { InstallPrompt } from '@/components/PWA/InstallPrompt'
 
 const TEAM_MEMBERS = [
   { name: 'Neelkanth Patel', role: 'Frontend Developer', icon: Monitor },
@@ -152,6 +153,7 @@ export default function LandingPage() {
 
   return (
     <>
+      <InstallPrompt />
       <div className={`${isDarkMode ? 'bg-background text-foreground' : 'bg-background text-foreground'}`}>
       
       {/* Floating Animated Glassmorphism Navbar */}
@@ -162,11 +164,11 @@ export default function LandingPage() {
 
         <div className="relative max-w-screen-2xl mx-auto px-8 sm:px-10 lg:px-12 py-5 flex justify-between items-center">
           {/* Enhanced Logo Section with Floating Animation */}
-          <div className="flex items-center gap-4 group cursor-pointer">
-            <div className={`w-14 h-14 bg-gradient-to-br ${colorClasses.primary} rounded-3xl flex items-center justify-center shadow-2xl shadow-orange-500/30 group-hover:shadow-orange-500/50 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 ease-out`}>
-              <Heart className="w-8 h-8 text-white drop-shadow-lg" />
+          <div className="flex items-center gap-2 sm:gap-4 group cursor-pointer">
+            <div className={`w-10 h-10 sm:w-14 h-14 bg-gradient-to-br ${colorClasses.primary} rounded-2xl sm:rounded-3xl flex items-center justify-center shadow-2xl shadow-orange-500/30 group-hover:shadow-orange-500/50 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 ease-out`}>
+              <Heart className="w-6 h-6 sm:w-8 h-8 text-white drop-shadow-lg" />
             </div>
-            <span className="text-3xl font-bold bg-gradient-to-r from-orange-600 via-orange-500 to-orange-700 bg-clip-text text-transparent group-hover:from-orange-500 group-hover:via-orange-600 group-hover:to-orange-700 transition-all duration-500 drop-shadow-sm animate-gradient">
+            <span className="text-xl sm:text-3xl font-bold bg-gradient-to-r from-orange-600 via-orange-500 to-orange-700 bg-clip-text text-transparent group-hover:from-orange-500 group-hover:via-orange-600 group-hover:to-orange-700 transition-all duration-500 drop-shadow-sm animate-gradient">
               MediTrack+
             </span>
           </div>
@@ -304,12 +306,12 @@ export default function LandingPage() {
             <Rocket className="w-4 h-4 inline mr-2 animate-bounce" />
             Next-Generation Healthcare Technology
           </div>
-          <h1 className={`text-5xl md:text-7xl font-extrabold leading-tight transition-all duration-1000 delay-400 ${heroVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'}`}>
-            Transform Your <span className="block bg-gradient-to-r from-orange-600 to-orange-700 bg-clip-text text-transparent animate-gradient">
+          <h1 className={`text-4xl sm:text-5xl md:text-7xl font-extrabold leading-[1.1] sm:leading-tight transition-all duration-1000 delay-400 ${heroVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'}`}>
+            Transform Your <span className="inline sm:block bg-gradient-to-r from-orange-600 to-orange-700 bg-clip-text text-transparent animate-gradient">
               Healthcare Practice
             </span> with AI
           </h1>
-          <p className={`mt-6 text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto transition-all duration-1000 delay-600 ${heroVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+          <p className={`mt-6 text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto px-4 sm:px-0 transition-all duration-1000 delay-600 ${heroVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
             Join thousands of healthcare professionals who trust MediTrack+ for intelligent patient management, AI-powered diagnostics, and seamless practice operations. Experience the future of healthcare today.
           </p>
           <div className={`mt-10 flex flex-col sm:flex-row gap-4 justify-center transition-all duration-1000 delay-800 ${heroVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
@@ -357,11 +359,11 @@ export default function LandingPage() {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center text-slate-500 dark:text-slate-400 text-sm font-medium mb-8 tracking-wider uppercase">Trusted by Industry Leaders</p>
-          <div className="flex justify-center items-center gap-12 flex-wrap opacity-60 hover:opacity-80 transition-opacity duration-300">
-            <span className="text-2xl font-bold text-slate-600 dark:text-slate-300 hover:text-orange-500 transition-colors duration-300 cursor-pointer">TechCrunch</span>
-            <span className="text-2xl font-bold text-slate-600 dark:text-slate-300 hover:text-orange-500 transition-colors duration-300 cursor-pointer">Forbes</span>
-            <span className="text-2xl font-bold text-slate-600 dark:text-slate-300 hover:text-orange-500 transition-colors duration-300 cursor-pointer">Wired</span>
-            <span className="text-2xl font-bold text-slate-600 dark:text-slate-300 hover:text-orange-500 transition-colors duration-300 cursor-pointer">The Verge</span>
+          <div className="flex justify-center items-center gap-6 sm:gap-12 flex-wrap opacity-60 hover:opacity-80 transition-opacity duration-300">
+            <span className="text-xl sm:text-2xl font-bold text-slate-600 dark:text-slate-300 hover:text-orange-500 transition-colors duration-300 cursor-pointer">TechCrunch</span>
+            <span className="text-xl sm:text-2xl font-bold text-slate-600 dark:text-slate-300 hover:text-orange-500 transition-colors duration-300 cursor-pointer">Forbes</span>
+            <span className="text-xl sm:text-2xl font-bold text-slate-600 dark:text-slate-300 hover:text-orange-500 transition-colors duration-300 cursor-pointer">Wired</span>
+            <span className="text-xl sm:text-2xl font-bold text-slate-600 dark:text-slate-300 hover:text-orange-500 transition-colors duration-300 cursor-pointer">Verge</span>
           </div>
         </div>
       </section>
@@ -435,7 +437,7 @@ export default function LandingPage() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
           {[
             { icon: Brain, title: 'AI-Powered Diagnostics', desc: 'Advanced machine learning algorithms provide diagnostic assistance with 99.7% accuracy. Get instant second opinions and treatment recommendations.', color: 'from-blue-500/20 to-blue-600/20' },
             { icon: Users, title: 'Smart Patient Management', desc: 'Comprehensive EHR system with intelligent scheduling, automated reminders, and predictive analytics for patient no-shows.', color: 'from-green-500/20 to-green-600/20' },
@@ -481,7 +483,7 @@ export default function LandingPage() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 relative z-10">
           {[
             { icon: Infinity, title: 'Offline Mode', desc: 'Never lose productivity during connectivity issues. Our offline-first architecture ensures you can continue working seamlessly.' },
             { icon: Zap, title: 'Real-Time Sync', desc: 'Instant synchronization across all devices. Changes made on one device appear everywhere in real-time.' },
@@ -523,7 +525,7 @@ export default function LandingPage() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
           {[
             { name: 'Dr. Sarah Rodriguez', role: 'Chief Medical Officer', company: 'City General Hospital', rating: 5, text: 'MediTrack+ has revolutionized our clinic operations. The AI diagnostics feature has improved our accuracy by 40% and the offline mode ensures we never lose patient data.', avatar: 'SR' },
             { name: 'Dr. Michael Patel', role: 'Director', company: 'Regional Medical Center', rating: 5, text: 'The cost savings alone have been incredible. We\'ve reduced our operational costs by 60% while improving patient satisfaction scores across the board.', avatar: 'MP' },
@@ -614,7 +616,7 @@ export default function LandingPage() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 relative z-10">
           <div className="space-y-8">
             {[
               { icon: MessageSquare, title: 'Email', content: 'contact@meditrack.com' },
