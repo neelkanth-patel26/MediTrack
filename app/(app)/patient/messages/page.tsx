@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -35,7 +35,7 @@ interface Doctor {
   specialization: string
 }
 
-export default function PatientMessages() {
+function MessagesContent() {
   const { user } = useAuth()
   const { getColorValues } = useTheme()
   const colorValues = getColorValues()
@@ -65,7 +65,6 @@ export default function PatientMessages() {
   // Handle URL parameters for pre-filled messages
   useEffect(() => {
     const doctorId = searchParams.get('doctorId')
-    const doctorName = searchParams.get('doctorName')
     const message = searchParams.get('message')
     
     if (doctorId) {
@@ -740,5 +739,20 @@ export default function PatientMessages() {
         </DialogContent>
       </Dialog>
     </div>
+  )
+}
+
+export default function PatientMessages() {
+  return (
+    <Suspense fallback={
+      <div className="h-[calc(100vh-3rem)] flex items-center justify-center bg-background">
+        <div className="animate-pulse text-center">
+          <div className="w-16 h-16 bg-slate-200 dark:bg-slate-700 rounded-full mx-auto mb-4"></div>
+          <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded w-32"></div>
+        </div>
+      </div>
+    }>
+      <MessagesContent />
+    </Suspense>
   )
 }
