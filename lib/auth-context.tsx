@@ -11,6 +11,7 @@ export interface User {
   email: string
   role: UserRole
   specialization?: string
+  avatar?: string
 }
 
 interface AuthContextType {
@@ -30,15 +31,15 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 const MOCK_USERS: Record<string, { password: string; user: User }> = {
   'admin@meditrack.com': {
     password: 'admin123',
-    user: { id: '550e8400-e29b-41d4-a716-446655440001', name: 'Admin User', email: 'admin@meditrack.com', role: 'admin' },
+    user: { id: '550e8400-e29b-41d4-a716-446655440001', name: 'Admin User', email: 'admin@meditrack.com', role: 'admin', avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop' },
   },
   'dr.urmi@meditrack.com': {
     password: 'doctor123',
-    user: { id: '550e8400-e29b-41d4-a716-446655440002', name: 'Dr. Urmi Thakkar', email: 'dr.urmi@meditrack.com', role: 'doctor', specialization: 'Cardiology' },
+    user: { id: '550e8400-e29b-41d4-a716-446655440002', name: 'Dr. Urmi Thakkar', email: 'dr.urmi@meditrack.com', role: 'doctor', specialization: 'Cardiology', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop' },
   },
   'nick@meditrack.com': {
     password: 'patient123',
-    user: { id: '550e8400-e29b-41d4-a716-446655440003', name: 'Nick Patel', email: 'nick@meditrack.com', role: 'patient' },
+    user: { id: '550e8400-e29b-41d4-a716-446655440003', name: 'Nick Patel', email: 'nick@meditrack.com', role: 'patient', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop' },
   },
 }
 
