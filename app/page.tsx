@@ -8,7 +8,7 @@ import {
   TrendingUp, Clock, Award, ArrowRight, MessageSquare, Download, Sparkles,
   Zap, Cloud, Lock, Code, Infinity, Activity, Pill, Stethoscope,
   Video, Bot, ChevronDown, ChevronUp, Facebook, Twitter, Linkedin, Instagram,
-  Monitor, Database, Cpu, Palette, Rocket, Hospital, HelpCircle, Phone
+  Monitor, Database, Cpu, Palette, Rocket, Hospital, HelpCircle, Phone, Music, Headphones
 } from 'lucide-react'
 import { useTheme } from '@/lib/theme-context'
 import { InstallPrompt } from '@/components/PWA/InstallPrompt'
@@ -158,71 +158,87 @@ export default function LandingPage() {
       <div className={`${isDarkMode ? 'bg-background text-foreground' : 'bg-background text-foreground'}`}>
 
         {/* Floating Animated Glassmorphism Navbar */}
-        <nav className={`fixed top-4 left-4 right-4 z-50 backdrop-blur-2xl ${isDarkMode ? 'bg-slate-900/40 border border-white/10' : 'bg-white/40 border border-black/5'} rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.15)] transition-all duration-500 ease-out max-w-screen-2xl mx-auto items-center flex animate-fade-in-down overflow-hidden`}>
+        <nav className={`fixed top-4 left-4 right-4 z-50 backdrop-blur-2xl ${isDarkMode ? 'bg-slate-900/40 border border-white/10' : 'bg-white/40 border border-black/5'} rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.15)] transition-all duration-500 ease-out max-w-screen-2xl mx-auto flex flex-col animate-fade-in-down overflow-hidden`}>
           {/* Floating Background Effects */}
           <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-r from-orange-500/5 via-transparent to-orange-600/5 animate-pulse"></div>
 
-          <div className="relative w-full h-16 sm:h-20 lg:h-24 px-6 sm:px-10 lg:px-12 flex items-center justify-between">
-            {/* Logo Section - Professional Typography */}
-            <div className="flex items-center">
-              <Link href="/" className="flex items-center gap-3 group">
-                <div className={`w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br ${colorClasses.primary} rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-500`}>
-                  <Heart className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-xl sm:text-2xl font-black bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent tracking-tighter leading-none">
+          <div className="relative w-full h-16 sm:h-20 lg:h-24">
+            {/* Mobile Header Layout - 3-Column Grid for perfect centering */}
+            <div className="lg:hidden grid grid-cols-3 items-center w-full h-full px-6">
+              {/* Left Column - Empty for balance */}
+              <div></div>
+
+              {/* Center Column - Branding Logo */}
+              <div className="flex justify-center">
+                <Link href="/" className="flex items-center gap-2 group">
+                  <div className={`w-9 h-9 bg-gradient-to-br ${colorClasses.primary} rounded-xl flex items-center justify-center shadow-lg group-active:scale-95 transition-transform`}>
+                    <Heart className="w-5 h-5 text-white" />
+                  </div>
+                  <span className="text-xl font-black bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent tracking-tighter">
                     MediTrack+
                   </span>
-                  <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/80 leading-none mt-1 hidden sm:block">
+                </Link>
+              </div>
+
+              {/* Right Column - Menu Button */}
+              <div className="flex justify-end">
+                <button
+                  className="p-3 rounded-2xl bg-orange-500/10 text-orange-600 dark:text-orange-400 hover:bg-orange-500/20 active:scale-95 transition-all duration-300"
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                >
+                  {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                </button>
+              </div>
+            </div>
+
+            {/* Desktop View Header Content - Strictly preserved */}
+            <div className="hidden lg:flex items-center justify-between w-full h-full px-10 lg:px-12">
+              <Link href="/" className="flex items-center gap-3 group">
+                <div className={`w-12 h-12 bg-gradient-to-br ${colorClasses.primary} rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-500`}>
+                  <Heart className="w-7 h-7 text-white" />
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-2xl font-black bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent tracking-tighter leading-none">
+                    MediTrack+
+                  </span>
+                  <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-muted-foreground/80 leading-none mt-1">
                     Precision Healthcare
                   </span>
                 </div>
               </Link>
-            </div>
 
-            {/* Center Navigation - Premium Pill Style */}
-            <div className="hidden lg:flex items-center bg-slate-500/5 dark:bg-white/5 p-1 rounded-2xl border border-white/5">
-              {[
-                { label: 'Home', href: '#home' },
-                { label: 'How It Works', href: '#how-it-works' },
-                { label: 'Services', href: '#services' },
-                { label: 'Features', href: '#features' },
-                { label: 'Contact', href: '#contact' }
-              ].map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  className="relative px-6 py-2.5 font-bold text-sm text-foreground/70 hover:text-orange-500 transition-all duration-300 rounded-xl hover:bg-white/50 dark:hover:bg-slate-800/50 group"
-                >
-                  {item.label}
-                  <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-orange-500 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300"></div>
-                </a>
-              ))}
-            </div>
+              <div className="flex items-center bg-slate-500/5 dark:bg-white/5 p-1 rounded-2xl border border-white/5">
+                {[
+                  { label: 'Home', href: '#home' },
+                  { label: 'How It Works', href: '#how-it-works' },
+                  { label: 'Services', href: '#services' },
+                  { label: 'Features', href: '#features' },
+                  { label: 'Contact', href: '#contact' }
+                ].map((item) => (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    className="relative px-6 py-2.5 font-bold text-sm text-foreground/70 hover:text-orange-500 transition-all duration-300 rounded-xl hover:bg-white/50 dark:hover:bg-slate-800/50 group"
+                  >
+                    {item.label}
+                    <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-orange-500 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300"></div>
+                  </a>
+                ))}
+              </div>
 
-            {/* Desktop Auth Buttons - Premium CTAs */}
-            <div className="hidden lg:flex items-center gap-4">
-              <Link href="/login">
-                <Button variant="ghost" className="rounded-2xl px-6 font-bold text-foreground/80 hover:text-orange-500 hover:bg-orange-500/5">
-                  Login
-                </Button>
-              </Link>
-              <Link href="/signup">
-                <Button className={`bg-gradient-to-r ${colorClasses.primary} rounded-2xl px-8 py-6 text-base font-black shadow-xl shadow-orange-500/20 hover:scale-105 active:scale-95 transition-all duration-300`}>
-                  Get Started
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
-              </Link>
-            </div>
-
-            {/* Mobile Menu Button - Minimalist Design */}
-            <div className="lg:hidden">
-              <button
-                className="p-3 rounded-2xl bg-orange-500/10 text-orange-600 dark:text-orange-400 hover:bg-orange-500/20 transition-all duration-300"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              >
-                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-              </button>
+              <div className="flex items-center gap-4">
+                <Link href="/login">
+                  <Button variant="ghost" className="rounded-2xl px-6 font-bold text-foreground/80 hover:text-orange-500 hover:bg-orange-500/5">
+                    Login
+                  </Button>
+                </Link>
+                <Link href="/signup">
+                  <Button className={`bg-gradient-to-r ${colorClasses.primary} rounded-2xl px-8 py-6 text-base font-black shadow-xl shadow-orange-500/20 hover:scale-105 active:scale-95 transition-all duration-300`}>
+                    Get Started
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
 
@@ -793,22 +809,40 @@ export default function LandingPage() {
               <div className="space-y-6">
                 <h4 className="text-lg font-bold text-white uppercase tracking-wider">Services</h4>
                 <ul className="space-y-3">
-                  {['Patient Management', 'Doctor Portal', 'Scheduling', 'Records'].map((item) => (
-                    <li key={item}><a href="#" className="text-slate-400 hover:text-orange-500 transition-colors text-sm font-medium">{item}</a></li>
+                  {[
+                    { label: 'Patient Management', href: '/services/patient-management' },
+                    { label: 'Doctor Portal', href: '/services/doctor-portal' },
+                    { label: 'Scheduling', href: '/services/appointment-scheduling' },
+                    { label: 'Records', href: '/services/medical-records' }
+                  ].map((item) => (
+                    <li key={item.label}>
+                      <Link href={item.href} className="text-slate-400 hover:text-orange-500 transition-colors text-sm font-medium">
+                        {item.label}
+                      </Link>
+                    </li>
                   ))}
                 </ul>
               </div>
               <div className="space-y-6">
                 <h4 className="text-lg font-bold text-white uppercase tracking-wider">Network</h4>
-                <ul className="space-y-3">
+                <ul className="space-y-4">
                   <li>
                     <a href="https://gnstudioxrage.wixsite.com/gamingnetworkstudio" target="_blank" rel="noopener noreferrer" className="group flex flex-col gap-1">
                       <span className="text-slate-400 group-hover:text-white transition-colors text-sm font-bold">GamingNetworkStudio</span>
-                      <span className="text-[10px] text-slate-600 uppercase tracking-widest group-hover:text-orange-500">Official Partner</span>
+                      <span className="text-[10px] text-slate-600 uppercase tracking-widest group-hover:text-orange-500 font-bold">Official Partner</span>
                     </a>
                   </li>
-                  {['About Us', 'Careers', 'Press', 'Blog'].map((item) => (
-                    <li key={item}><a href="#" className="text-slate-400 hover:text-orange-500 transition-colors text-sm font-medium">{item}</a></li>
+                  { [
+                    { label: 'About Us', href: '/company/about-us' },
+                    { label: 'Careers', href: '/company/careers' },
+                    { label: 'Press', href: '/company/press' },
+                    { label: 'Blog', href: '/company/blog' }
+                  ].map((item) => (
+                    <li key={item.label}>
+                      <Link href={item.href} className="text-slate-400 hover:text-orange-500 transition-colors text-sm font-medium">
+                        {item.label}
+                      </Link>
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -822,7 +856,7 @@ export default function LandingPage() {
                   <div className="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center shrink-0">
                     <Activity className="w-4 h-4" />
                   </div>
-                  <span>support@meditrack.com</span>
+                  <span>gns.media.group@outlook.com</span>
                 </li>
                 <li className="flex items-center justify-center md:justify-start gap-3 text-slate-400 text-sm">
                   <div className="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center shrink-0">
@@ -858,8 +892,8 @@ export default function LandingPage() {
               >
                 Made By Group-1
               </button>
-              <a href="#" className="hover:text-white transition-colors">Privacy</a>
-              <a href="#" className="hover:text-white transition-colors">Terms</a>
+              <Link href="/company/privacy-policy" className="hover:text-white transition-colors">Privacy</Link>
+              <Link href="/company/terms-of-service" className="hover:text-white transition-colors">Terms</Link>
             </div>
           </div>
         </div>
